@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled, { css } from "styled-components";
-
 //Start Styles
+import { NavContext } from "../utils/NavContext";
 
 const HamburgerIcon = styled.div`
   display: none;
@@ -51,7 +51,8 @@ const HamburgerIcon = styled.div`
 
 //End Styles
 
-const Hamburger = ({ closed, setClosed }) => {
+const Hamburger = () => {
+  const { closed, setClosed } = useContext(NavContext);
   return (
     <HamburgerIcon closed={closed} onClick={() => setClosed(!closed)}>
       <div />

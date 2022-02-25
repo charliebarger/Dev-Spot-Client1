@@ -1,6 +1,9 @@
+import React, { useContext } from "react";
 import styled, { css } from "styled-components";
 import LogInButton from "./LoggedOut/LogInButton";
 import SignUpButton from "./LoggedOut/SignUpButton";
+import { NavContext } from "../utils/NavContext";
+
 const StyledSlidingNav = styled.nav`
   padding: 2rem;
   gap: 1rem;
@@ -26,7 +29,8 @@ const StyledSlidingNav = styled.nav`
     `}
 `;
 
-const SlidingNav = ({ closed }) => {
+const SlidingNav = () => {
+  const { closed, setClosed } = useContext(NavContext);
   return (
     <StyledSlidingNav closed={closed}>
       <LogInButton></LogInButton>

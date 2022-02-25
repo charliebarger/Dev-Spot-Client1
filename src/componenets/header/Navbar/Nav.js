@@ -13,14 +13,12 @@ const NavWrapper = styled.nav`
 `;
 
 const Nav = () => {
-  const [closed, setClosed] = useState(false);
-
   return (
     <NavWrapper>
       {/* <LogInButton></LogInButton>
       <SignUpButton></SignUpButton> */}
-      <Hamburger closed={closed} setClosed={setClosed} />
-      <SlidingNav closed={closed}></SlidingNav>
+      <Hamburger />
+      <SlidingNav></SlidingNav>
     </NavWrapper>
   );
 };
