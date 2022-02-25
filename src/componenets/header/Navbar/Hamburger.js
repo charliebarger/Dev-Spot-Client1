@@ -5,7 +5,7 @@ import { NavContext } from "../utils/NavContext";
 
 const HamburgerIcon = styled.div`
   display: none;
-  @media ${({ theme }) => theme.mediaQueries.below550} {
+  @media ${({ theme }) => theme.mediaQueries.below850} {
     width: 30px;
     margin-left: 30px;
 

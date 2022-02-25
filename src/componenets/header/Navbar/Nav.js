@@ -1,22 +1,17 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import LogInButton from "./LoggedOut/LogInButton";
-import SignUpButton from "./LoggedOut/SignUpButton";
+import UpperNav from "./UpperNav";
 import Hamburger from "./Hamburger";
 import SlidingNav from "./SlidingNav";
 
 const NavWrapper = styled.nav`
-  display: flex;
-  gap: 1rem;
-
   margin-left: auto;
 `;
 
 const Nav = () => {
   return (
     <NavWrapper>
-      {/* <LogInButton></LogInButton>
-      <SignUpButton></SignUpButton> */}
+      <UpperNav />
       <Hamburger />
       <SlidingNav></SlidingNav>
     </NavWrapper>
