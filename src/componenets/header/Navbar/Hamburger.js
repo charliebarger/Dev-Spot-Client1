@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styled, { css } from "styled-components";
 //Start Styles
-import { NavContext } from "../utils/NavContext";
+import { NavContext } from "../../utils/NavContext";
 
 const HamburgerIcon = styled.div`
   display: none;

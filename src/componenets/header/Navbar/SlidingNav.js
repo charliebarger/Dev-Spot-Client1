@@ -5,7 +5,7 @@ import LogOutButton from "./LoggedIn/LogOutButton";
 import CreatePostButton from "./LoggedIn/CreatePostButton";
 import LogInButton from "./LoggedOut/LogInButton";
 import SignUpButton from "./LoggedOut/SignUpButton";
-import { NavContext } from "../utils/NavContext";
+import { NavContext } from "../../utils/NavContext";
 
 const StyledSlidingNav = styled.div`
   display: none;
@@ -25,7 +25,6 @@ const StyledSlidingNav = styled.div`
     color: white;
     min-height: calc(100vh - 200px);
     transition: all 0.5s;
-    opacity: 0.9;
     z-index: 100;
     ${({ loggedIn }) =>
       loggedIn &&
