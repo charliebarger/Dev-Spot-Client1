@@ -12,16 +12,18 @@ const StyledBody = styled.main`
 `;
 
 const MuteBody = styled.div`
-  display: block;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: grey;
-  z-index: 1;
-  transition: 0.5s;
-  opacity: ${({ closed }) => (closed ? 0.9 : 0)};
+  @media ${({ theme }) => theme.mediaQueries.below850} {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: grey;
+    z-index: 1;
+    transition: 0.5s;
+    opacity: ${({ closed }) => (closed ? 0.9 : 0)};
+  }
 `;
 
 const StyledBannerWrapper = styled.section`
@@ -39,7 +41,7 @@ const Body = () => {
   const { closed, setClosed } = useContext(NavContext);
   return (
     <StyledBody>
-      <MuteBody closed={closed} />
+      <MuteBody closed={closed} onClick={() => setClosed(false)} />
       <StyledBannerWrapper>
         <div class="terminal">
           <div class="terminal_top">
