@@ -98,7 +98,7 @@
   color: #26dd3a;
 }
 
-h2 {
+.terminal h2 {
   opacity: 0;
   font-size: 18px;
   font-weight: 300;
