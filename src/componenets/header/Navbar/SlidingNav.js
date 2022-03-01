@@ -52,7 +52,6 @@ const SlidingNav = () => {
       {/* <LogInButton></LogInButton>
       <SignUpButton></SignUpButton> */}
       <StyledSliderRoute>Home</StyledSliderRoute>
-      <StyledSliderRoute>Dashboard</StyledSliderRoute>
       <CreatePostButton />
       <LogOutButton />
     </StyledSlidingNav>

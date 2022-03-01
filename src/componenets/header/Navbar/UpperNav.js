@@ -27,7 +27,6 @@ const UpperNav = () => {
       </NotLoggedInWrapper> */}
       <LoggedInWrapper>
         <StyledRoute>Home</StyledRoute>
-        <StyledRoute>Dashboard</StyledRoute>
         <CreatePostButton />
         <LogOutButton />
       </LoggedInWrapper>

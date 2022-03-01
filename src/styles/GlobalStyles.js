@@ -5,6 +5,7 @@ const GlobalStyles = createGlobalStyle`
 ${normalize}
 html {
     box-sizing: border-box;
+    height:100%
 }
 *,
 *:before,
@@ -22,6 +23,7 @@ body{
     margin:0;
     min-height: 100vh;
     position:relative;
+    height:100%;
 }
 
 button{
