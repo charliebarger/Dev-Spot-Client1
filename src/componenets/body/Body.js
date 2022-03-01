@@ -4,22 +4,21 @@ import { NavContext } from "../utils/NavContext";
 import MuteBody from "./MuteBody";
 import Terminal from "./Terminal";
 import ArticleWrapper from "./ArticleSection";
+import SignUpForm from "./SignUp";
 const StyledBody = styled.main`
   min-height: calc(100vh - 62px);
-  padding: 0 1rem;
+  margin: auto;
   position: relative;
-  * {
-    cursor: pointer;
-  }
 `;
 
 const Body = () => {
   const { closed, setClosed } = useContext(NavContext);
   return (
     <StyledBody>
-      <MuteBody />
-      <Terminal />
-      <ArticleWrapper />
+      {/* <MuteBody /> */}
+      {/* <Terminal /> */}
+      {/* <ArticleWrapper /> */}
+      <SignUpForm />
     </StyledBody>
   );
 };

@@ -17,7 +17,7 @@ const Terminal = () => {
           </div>
           <div>
             <h2>
-              A place for developers to talk, post, and comments on the hottest
+              A place for developers to talk, post, and comment on the hottest
               news in tech!
             </h2>
           </div>
