@@ -1,6 +1,6 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import React from "react";
-import Button from "../../Button";
+import Button from "../../utils/Button";
 
 const StyledSubmitButton = styled(Button)`
   background: ${({ theme }) => theme.colors.logoColor};

@@ -1,11 +1,9 @@
 import styled from "styled-components";
 import React from "react";
-import Article from "./Article";
+import ArticlePreview from "./ArticlePreview";
 
 const StyledArticleWrapper = styled.section`
   padding: 1.5rem;
-  max-width: 765px;
-  margin: auto;
 `;
 
 const StyledArticleH2 = styled.h2`
@@ -15,13 +13,13 @@ const StyledArticleH2 = styled.h2`
   border-bottom: 1px solid ${({ theme }) => theme.colors.fontColor2};
 `;
 
-const ArticleWrapper = () => {
+const ArticlePreviewWrapper = () => {
   return (
     <StyledArticleWrapper>
       <StyledArticleH2>Articles</StyledArticleH2>
-      <Article />
+      <ArticlePreview />
     </StyledArticleWrapper>
   );
 };
 
-export default ArticleWrapper;
+export default ArticlePreviewWrapper;

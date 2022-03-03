@@ -19,7 +19,7 @@ const StyledInputLabel = styled.label`
 
 const FormLabel = ({ children, labelFor, required }) => {
   return (
-    <StyledInputLabel for={labelFor} required={required}>
+    <StyledInputLabel htmlFor={labelFor} required={required}>
       {children}
     </StyledInputLabel>
   );

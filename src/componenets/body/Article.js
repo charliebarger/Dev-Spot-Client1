@@ -1,88 +1,74 @@
 import styled from "styled-components";
 import React from "react";
 import brainImg from "../../assets/images/brain.jpg";
-
-const StyledArticleLink = styled.a``;
+import CommentSection from "./Comments/CommentWrapper";
 
 const StyledArticle = styled.article`
-  padding: 1rem 0;
-  margin: 1rem 0;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.fontColor2};
-  display: flex;
-  gap: 2rem;
+  max-width: 650px;
+  margin: auto;
+  padding: 2rem;
+  border-radius: 5px;
+  box-shadow: 3px 3px 10px grey;
 `;
 
-const StyledArticleInfo = styled.section`
-  flex: 3;
-`;
-const StyledImageWrapperSection = styled.div`
-  flex: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+const StyledArticleHeader = styled.h1`
+  margin: 0px;
+  text-align: center;
+  font-weight: 400;
 `;
 
-const StyledImageWrapper = styled.div`
-  width: 120px;
-  height: 120px;
-  @media ${({ theme }) => theme.mediaQueries.below550} {
-    width: 80px;
-    height: 80px;
-  }
-`;
-
-const StyledImage = styled.img`
-  object-fit: cover;
-  height: 100%;
-  width: 100%;
-`;
-const StyledTopWrapper = styled.div`
-  display: flex;
-  gap: 0.25rem;
-  font-size: 0.95rem;
-  font-style: normal;
-  color: ${({ theme }) => theme.colors.fontColor2};
-`;
 const StyledAuthorName = styled.address`
   font-style: normal;
-  color: ${({ theme }) => theme.colors.primary};
 `;
 const StyledDate = styled.time``;
 
-const StyledArticleHeader = styled.h3`
-  font-weight: 500;
-  margin-bottom: 0;
+const NameDateWrapper = styled.div`
+  margin: 1rem 0;
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
+  align-items: center;
+  color: ${({ theme }) => theme.colors.fontColor2};
 `;
 
-const StyledArticleBody = styled.p`
-  display: block;
+const ArticleImg = styled.img`
+  max-width: 100%;
+  height: auto;
+`;
+
+const ArticleContent = styled.p`
+  margin: 2rem 0;
   font-family: ${({ theme }) => theme.fonts.serifPrimary};
-  margin-top: 0.5rem;
+  font-size: 1.25rem;
 `;
 
 const Article = () => {
   return (
-    <StyledArticleLink>
-      <StyledArticle>
-        <StyledArticleInfo>
-          <StyledTopWrapper>
-            <StyledAuthorName>Charles Barger</StyledAuthorName>
-            <span>|</span>
-            <StyledDate>01/24/1996</StyledDate>
-          </StyledTopWrapper>
-          <StyledArticleHeader>My First Blog Post</StyledArticleHeader>
-          <StyledArticleBody>
-            If you’re like me — a tech savvy individual (that also happens to be
-            a software engineer) or just a casual technology user, then..
-          </StyledArticleBody>
-        </StyledArticleInfo>
-        <StyledImageWrapperSection>
-          <StyledImageWrapper>
-            <StyledImage src={brainImg}></StyledImage>
-          </StyledImageWrapper>
-        </StyledImageWrapperSection>
-      </StyledArticle>
-    </StyledArticleLink>
+    <StyledArticle>
+      <StyledArticleHeader>My First Blog Post</StyledArticleHeader>
+      <NameDateWrapper>
+        <StyledAuthorName>Charles Barger</StyledAuthorName>
+        <span> | </span>
+        <StyledDate>01/24/1996</StyledDate>
+      </NameDateWrapper>
+      <ArticleImg src={brainImg} />
+      <section>
+        <ArticleContent>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolor
+          adipisci expedita aliquid fugit fugiat, alias odit facere quos at rem
+          in cupiditate voluptatem officia aperiam, et, labore nihil corrupti
+          sint perferendis? Provident eos molestiae totam! Possimus, officiis
+          voluptate? Magnam sequi iste debitis blanditiis. Ad, tempore. Sint et
+          nihil molestias alias. Neque magni temporibus sunt odio nisi cum,
+          suscipit qui necessitatibus assumenda tenetur adipisci in eius sint
+          exercitationem reiciendis mollitia, quod ipsa saepe repellendus ut
+          officia. Cumque alias quibusdam, ut ad dolor placeat iusto earum illum
+          ipsum tenetur numquam beatae totam iure odit, nam deleniti rem facere!
+          Pariatur ipsam doloribus expedita.
+        </ArticleContent>
+      </section>
+      <CommentSection></CommentSection>
+    </StyledArticle>
   );
 };
 

@@ -53,6 +53,7 @@ const HamburgerIcon = styled.div`
 
 const Hamburger = () => {
   const { closed, setClosed } = useContext(NavContext);
+  console.log(closed);
   return (
     <HamburgerIcon closed={closed} onClick={() => setClosed(!closed)}>
       <div />

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Button from "../../../Button";
+import Button from "../../../utils/Button";
 const StyledSignUpButton = styled(Button)`
   background: hsl(215, 100%, 50%);
   color: white;

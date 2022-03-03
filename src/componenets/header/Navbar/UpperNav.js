@@ -4,7 +4,7 @@ import LogInButton from "./LoggedOut/LogInButton";
 import SignUpButton from "./LoggedOut/SignUpButton";
 import CreatePostButton from "./LoggedIn/CreatePostButton";
 import LogOutButton from "./LoggedIn/LogOutButton";
-import StyledRoute from "../../Route";
+import StyledRoute from "../../utils/Route";
 const StyledUpperNavWrapper = styled.div`
   display: block;
   @media ${({ theme }) => theme.mediaQueries.below850} {
