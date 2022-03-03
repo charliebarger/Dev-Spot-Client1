@@ -10,6 +10,10 @@ import { NavContext } from "../../utils/NavContext";
 
 const StyledLink = styled(Link)`
   text-decoration: none;
+
+  &:hover {
+    transform: scale(0.95);
+  }
 `;
 
 const StyledSlidingNav = styled.div`
@@ -55,16 +59,17 @@ const SlidingNav = () => {
   const { closed, setClosed } = useContext(NavContext);
   return (
     <StyledSlidingNav closed={closed} loggedIn onClick={() => setClosed(false)}>
-      {/* <LogInButton></LogInButton>
-      <SignUpButton></SignUpButton> */}
-      <StyledLink to={"/"}>
+      <StyledLink to={"/signIn"}>
+        <LogInButton></LogInButton>
+      </StyledLink>
+      <StyledLink to={"/signUp"}>
+        <SignUpButton></SignUpButton>
+      </StyledLink>
+      {/* <StyledLink to={"/"}>
         <StyledSliderRoute>Home</StyledSliderRoute>
       </StyledLink>
-      <Link to={"/signIn"}>
-        <CreatePostButton />
-      </Link>
       <CreatePostButton />
-      <LogOutButton />
+      <LogOutButton /> */}
     </StyledSlidingNav>
   );
 };

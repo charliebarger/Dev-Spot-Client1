@@ -5,6 +5,18 @@ import SignUpButton from "./LoggedOut/SignUpButton";
 import CreatePostButton from "./LoggedIn/CreatePostButton";
 import LogOutButton from "./LoggedIn/LogOutButton";
 import StyledRoute from "../../utils/Route";
+import { Link } from "react-router-dom";
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: white;
+  align-self: center;
+
+  &:hover {
+    transform: scale(0.95);
+  }
+`;
+
 const StyledUpperNavWrapper = styled.div`
   display: block;
   @media ${({ theme }) => theme.mediaQueries.below850} {
@@ -12,7 +24,7 @@ const StyledUpperNavWrapper = styled.div`
   }
 `;
 
-const LoggedInWrapper = styled.div`
+const NavWrapper = styled.div`
   display: flex;
   gap: 1rem;
   color: white;
@@ -21,15 +33,19 @@ const LoggedInWrapper = styled.div`
 const UpperNav = () => {
   return (
     <StyledUpperNavWrapper>
-      {/* <NotLoggedInWrapper>
-        <SignUpButton />
-        <LogInButton />
-      </NotLoggedInWrapper> */}
-      <LoggedInWrapper>
-        <StyledRoute>Home</StyledRoute>
+      <NavWrapper>
+        {/* <StyledLink to={"/signIn"}>
+          <LogInButton></LogInButton>
+        </StyledLink>
+        <StyledLink to={"/signUp"}>
+          <SignUpButton></SignUpButton>
+        </StyledLink> */}
+        <StyledLink to={"/"}>
+          <StyledRoute>Home</StyledRoute>
+        </StyledLink>
         <CreatePostButton />
         <LogOutButton />
-      </LoggedInWrapper>
+      </NavWrapper>
     </StyledUpperNavWrapper>
   );
 };
