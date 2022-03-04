@@ -23,13 +23,13 @@ const Body = () => {
   return (
     <StyledBody>
       <MuteBody />
-      <ArticleCreator />
-      {/* <Routes>
+      <Routes>
         <Route path={"/"} element={<HomePage />} />
         <Route path={"/signUp"} element={<SignUpForm />} />
         <Route path={"/signIn"} element={<SignInForm />} />
         <Route path={"/article/:id"} element={<Article />} />
-      </Routes> */}
+        <Route path={"/createArticle"} element={<ArticleCreator />} />
+      </Routes>
     </StyledBody>
   );
 };

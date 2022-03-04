@@ -12,6 +12,7 @@ html {
 *:after {
     box-sizing: inherit;
     font-family:inherit;
+    text-decoration:none;
 }
 img{
     max-width:100%;

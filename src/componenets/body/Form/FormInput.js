@@ -24,8 +24,30 @@ const StyledInput = styled.input`
   }
 `;
 
-const FormInput = ({ placeHolder, name, id }) => {
-  return <StyledInput name={name} id={id} />;
+const FormInput = ({
+  placeHolder,
+  name,
+  id,
+  type,
+  required,
+  maxlength,
+  minlength,
+  change,
+  value,
+}) => {
+  return (
+    <StyledInput
+      name={name}
+      id={id}
+      type={type}
+      placeholder={placeHolder}
+      required={required}
+      maxLength={maxlength}
+      minLength={minlength}
+      value={value}
+      onChange={change}
+    />
+  );
 };
 
 export default FormInput;

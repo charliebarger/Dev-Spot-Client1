@@ -10,8 +10,8 @@ const StyledSignUpForm = styled.form`
   box-shadow: 4px 5px 19px #7a7a7a;
 `;
 
-const Form = ({ children }) => {
-  return <StyledSignUpForm>{children}</StyledSignUpForm>;
+const Form = ({ children, submitFunc }) => {
+  return <StyledSignUpForm onSubmit={submitFunc}>{children}</StyledSignUpForm>;
 };
 
 export default Form;

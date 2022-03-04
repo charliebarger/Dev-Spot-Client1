@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import logo from "../../assets/images/logo.png";
+import { Link } from "react-router-dom";
 const StyledLogoWrapper = styled.div`
   display: flex;
   color: white;
@@ -23,10 +24,12 @@ const StyledCompanyName = styled.span`
 
 const Logo = () => {
   return (
-    <StyledLogoWrapper>
-      <StyledLogo alt="logo" src={logo}></StyledLogo>
-      <StyledCompanyName>Dev Spot</StyledCompanyName>
-    </StyledLogoWrapper>
+    <Link to={"/"}>
+      <StyledLogoWrapper>
+        <StyledLogo alt="logo" src={logo}></StyledLogo>
+        <StyledCompanyName>Dev Spot</StyledCompanyName>
+      </StyledLogoWrapper>
+    </Link>
   );
 };
 

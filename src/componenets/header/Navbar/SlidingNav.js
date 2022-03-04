@@ -68,7 +68,9 @@ const SlidingNav = () => {
       {/* <StyledLink to={"/"}>
         <StyledSliderRoute>Home</StyledSliderRoute>
       </StyledLink>
-      <CreatePostButton />
+      <StyledLink to={"/createArticle"}>
+        <CreatePostButton />
+      </StyledLink>
       <LogOutButton /> */}
     </StyledSlidingNav>
   );

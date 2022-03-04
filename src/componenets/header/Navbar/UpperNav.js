@@ -43,7 +43,9 @@ const UpperNav = () => {
         <StyledLink to={"/"}>
           <StyledRoute>Home</StyledRoute>
         </StyledLink>
-        <CreatePostButton />
+        <StyledLink to={"/createArticle"}>
+          <CreatePostButton />
+        </StyledLink>
         <LogOutButton />
       </NavWrapper>
     </StyledUpperNavWrapper>
