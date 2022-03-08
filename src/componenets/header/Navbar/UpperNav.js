@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import LogInButton from "./LoggedOut/LogInButton";
 import SignUpButton from "./LoggedOut/SignUpButton";
@@ -31,6 +31,18 @@ const NavWrapper = styled.div`
 `;
 
 const UpperNav = () => {
+  useEffect(() => {
+    const token = localStorage.getItem(`token`);
+    let user = await fetch("http://localhost:4000/api/users/protected", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
+  }, []);
+
   return (
     <StyledUpperNavWrapper>
       <NavWrapper>

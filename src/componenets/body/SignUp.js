@@ -16,7 +16,7 @@ const SignUpForm = () => {
 
   const registerUser = async (e) => {
     e.preventDefault();
-    const answer = await fetch("http://localhost:4000/api/users/signup", {
+    let answer = await fetch("http://localhost:4000/api/users/signup", {
       method: "POST",
       mode: "cors",
       headers: {
@@ -30,6 +30,7 @@ const SignUpForm = () => {
         confirmPassword,
       }),
     });
+    answer = await answer.json();
     console.log(answer);
   };
 
