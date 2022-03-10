@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import LogInButton from "./LoggedOut/LogInButton";
 import SignUpButton from "./LoggedOut/SignUpButton";
@@ -6,7 +6,7 @@ import CreatePostButton from "./LoggedIn/CreatePostButton";
 import LogOutButton from "./LoggedIn/LogOutButton";
 import StyledRoute from "../../utils/Route";
 import { Link } from "react-router-dom";
-
+import { UserContext } from "../../utils/UserContext";
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: white;
@@ -31,34 +31,31 @@ const NavWrapper = styled.div`
 `;
 
 const UpperNav = () => {
-  useEffect(() => {
-    const token = localStorage.getItem(`token`);
-    let user = await fetch("http://localhost:4000/api/users/protected", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
-  }, []);
+  const { loggedIn } = useContext(UserContext);
 
   return (
     <StyledUpperNavWrapper>
       <NavWrapper>
-        {/* <StyledLink to={"/signIn"}>
-          <LogInButton></LogInButton>
-        </StyledLink>
-        <StyledLink to={"/signUp"}>
-          <SignUpButton></SignUpButton>
-        </StyledLink> */}
-        <StyledLink to={"/"}>
-          <StyledRoute>Home</StyledRoute>
-        </StyledLink>
-        <StyledLink to={"/createArticle"}>
-          <CreatePostButton />
-        </StyledLink>
-        <LogOutButton />
+        {loggedIn ? (
+          <>
+            <StyledLink to={"/"}>
+              <StyledRoute>Home</StyledRoute>
+            </StyledLink>
+            <StyledLink to={"/createArticle"}>
+              <CreatePostButton />
+            </StyledLink>
+            <LogOutButton />
+          </>
+        ) : (
+          <>
+            <StyledLink to={"/signIn"}>
+              <LogInButton></LogInButton>
+            </StyledLink>
+            <StyledLink to={"/signUp"}>
+              <SignUpButton></SignUpButton>
+            </StyledLink>
+          </>
+        )}
       </NavWrapper>
     </StyledUpperNavWrapper>
   );
