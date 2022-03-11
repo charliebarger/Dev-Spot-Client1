@@ -12,6 +12,7 @@ const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
+    console.log("app mount");
     const authenticate = async (token) => {
       try {
         const authenticate = await fetch(

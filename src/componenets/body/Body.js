@@ -9,7 +9,7 @@ import ArticleCreator from "./CreateArticle";
 import Article from "./Article";
 import SignUpForm from "./SignUp";
 import { Routes, Route } from "react-router-dom";
-
+import PrivateRoute from "../utils/ProtectedRoute";
 const StyledBody = styled.main`
   background: #ededed;
   padding: 2rem 1rem;
@@ -28,7 +28,14 @@ const Body = () => {
         <Route path={"/signUp"} element={<SignUpForm />} />
         <Route path={"/signIn"} element={<SignInForm />} />
         <Route path={"/article/:id"} element={<Article />} />
-        <Route path={"/createArticle"} element={<ArticleCreator />} />
+        <Route
+          path="/createArticle"
+          element={
+            <PrivateRoute>
+              <ArticleCreator />
+            </PrivateRoute>
+          }
+        ></Route>
       </Routes>
     </StyledBody>
   );
