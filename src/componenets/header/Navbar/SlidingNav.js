@@ -7,7 +7,7 @@ import CreatePostButton from "./LoggedIn/CreatePostButton";
 import LogInButton from "./LoggedOut/LogInButton";
 import SignUpButton from "./LoggedOut/SignUpButton";
 import { NavContext } from "../../utils/NavContext";
-
+import { UserContext } from "../../utils/UserContext";
 const StyledLink = styled(Link)`
   text-decoration: none;
 
@@ -57,21 +57,29 @@ const StyledSliderRoute = styled(StyledRoute)`
 
 const SlidingNav = () => {
   const { closed, setClosed } = useContext(NavContext);
+  const { loggedIn } = useContext(UserContext);
   return (
     <StyledSlidingNav closed={closed} loggedIn onClick={() => setClosed(false)}>
-      <StyledLink to={"/signIn"}>
-        <LogInButton></LogInButton>
-      </StyledLink>
-      <StyledLink to={"/signUp"}>
-        <SignUpButton></SignUpButton>
-      </StyledLink>
-      {/* <StyledLink to={"/"}>
-        <StyledSliderRoute>Home</StyledSliderRoute>
-      </StyledLink>
-      <StyledLink to={"/createArticle"}>
-        <CreatePostButton />
-      </StyledLink>
-      <LogOutButton /> */}
+      {loggedIn ? (
+        <>
+          <StyledLink to={"/"}>
+            <StyledSliderRoute>Home</StyledSliderRoute>
+          </StyledLink>
+          <StyledLink to={"/createArticle"}>
+            <CreatePostButton />
+          </StyledLink>
+          <LogOutButton />
+        </>
+      ) : (
+        <>
+          <StyledLink to={"/signIn"}>
+            <LogInButton></LogInButton>
+          </StyledLink>
+          <StyledLink to={"/signUp"}>
+            <SignUpButton></SignUpButton>
+          </StyledLink>
+        </>
+      )}
     </StyledSlidingNav>
   );
 };
