@@ -4,46 +4,71 @@ import FormHeader from "./Form/FormHeader";
 import FormInput from "./Form/FormInput";
 import FormLabel from "./Form/FormLabel";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+const StyledForm = styled.form`
+  max-width: 800px;
+  margin: auto;
+  background: red;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 4px 5px 19px #7a7a7a;
+  background: white;
+`;
+
 export default function ArticleCreator() {
+  const navigate = useNavigate();
   const editorRef = useRef();
-  const [title, setTitle] = useState();
-  const log = () => {
-    if (editorRef.current) {
-      console.log(editorRef.current.getContent());
+  const [title, setTitle] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const addPost = async (e) => {
+    e.preventDefault();
+    try {
+      let data = await fetch("http://localhost:4000/api/posts", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem(`token`),
+        },
+        body: JSON.stringify({
+          title,
+          imageUrl,
+          postBody: editorRef.current.getContent(),
+        }),
+      });
+      const response = await data.json();
+      if (data.ok) {
+        console.log(response);
+        navigate("/");
+      } else {
+        throw new Error(response.error);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
-  const StyledForm = styled.form`
-    max-width: 800px;
-    margin: auto;
-    background: red;
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: 4px 5px 19px #7a7a7a;
-    background: white;
-  `;
-
   return (
-    <StyledForm>
+    <StyledForm onSubmit={addPost}>
+      <FormHeader>Create Blog Post</FormHeader>
       <FormLabel required labelFor={"title"}>
         Title
       </FormLabel>
       <FormInput
         value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        change={(e) => setTitle(e.target.value)}
         name={"title"}
         id={"title"}
         type="text"
         required
       ></FormInput>
-      <FormLabel labelFor={"title"}>Image URL</FormLabel>
+      <FormLabel labelFor={"imageUrl"}>Image URL</FormLabel>
       <FormInput
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        name={"title"}
-        id={"title"}
-        type="text"
-        required
+        value={imageUrl}
+        change={(e) => setImageUrl(e.target.value)}
+        name={"imageUrl"}
+        id={"imageUrl"}
+        type="imageUrl"
       ></FormInput>
       <FormLabel required labelFor={"editor"}>
         Content
@@ -69,7 +94,7 @@ export default function ArticleCreator() {
             "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
         }}
       />
-      {/* <button onClick={log}>Submit</button> */}
+      <button type="submit">Submit</button>
     </StyledForm>
   );
 }
