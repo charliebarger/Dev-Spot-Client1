@@ -20,6 +20,12 @@ const SignInForm = () => {
   const navigate = useNavigate();
   const { loggedIn, setLoggedIn } = useContext(UserContext);
 
+  useEffect(() => {
+    if (loggedIn) {
+      navigate("/");
+    }
+  }, [loggedIn, navigate]);
+
   const registerUser = async (e) => {
     e.preventDefault();
     try {

@@ -11,7 +11,7 @@ const StyledMuteBody = styled.div`
     left: 0;
     right: 0;
     background: grey;
-    z-index: ${({ closed }) => (closed ? 1 : 0)};
+    z-index: ${({ closed }) => (closed ? 2 : -100)};
     transition: opacity 0.5s;
     opacity: ${({ closed }) => (closed ? 0.9 : 0)};
   }

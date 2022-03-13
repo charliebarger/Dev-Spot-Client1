@@ -1,19 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Form from "./Form/Form";
 import FormHeader from "./Form/FormHeader";
 import FormLabel from "./Form/FormLabel";
 import FormInput from "./Form/FormInput";
 import RequiredFields from "./Form/RequiredSections";
 import InternalLink from "./Form/InternalLink";
+import { UserContext } from "../utils/UserContext";
 import SubmitButton from "./Form/SubmitButton";
-
+import { useNavigate } from "react-router-dom";
 const SignUpForm = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
+  const { loggedIn, setLoggedIn } = useContext(UserContext);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (loggedIn) {
+      navigate("/");
+    }
+  }, [loggedIn, navigate]);
   const registerUser = async (e) => {
     e.preventDefault();
     let answer = await fetch("http://localhost:4000/api/users/signup", {
