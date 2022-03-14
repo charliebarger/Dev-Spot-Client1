@@ -1,12 +1,12 @@
 import React from "react";
 import Terminal from "./Terminal";
-import ArticlePreview from "./ArticlePreview/ArticlePreview";
+import ArticlePreviewWrapper from "./ArticlePreview/ArticlePreviewWrapper";
 
 const HomePage = () => {
   return (
     <>
       <Terminal />
-      <ArticlePreview />
+      <ArticlePreviewWrapper />
     </>
   );
 };
