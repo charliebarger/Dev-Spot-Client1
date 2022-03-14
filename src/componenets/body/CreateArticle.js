@@ -5,6 +5,7 @@ import FormInput from "./Form/FormInput";
 import FormLabel from "./Form/FormLabel";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import Button from "../utils/Button";
 const StyledForm = styled.form`
   max-width: 800px;
   margin: auto;
@@ -13,6 +14,18 @@ const StyledForm = styled.form`
   border-radius: 10px;
   box-shadow: 4px 5px 19px #7a7a7a;
   background: white;
+`;
+
+const SubmitButton = styled(Button)`
+  margin: 1rem 0;
+  background: black;
+  color: white;
+  border: black solid 1px;
+  transition: 0.25s;
+  &:hover {
+    background: white;
+    color: black;
+  }
 `;
 
 export default function ArticleCreator() {
@@ -94,7 +107,7 @@ export default function ArticleCreator() {
             "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
         }}
       />
-      <button type="submit">Submit</button>
+      <SubmitButton type="submit">Submit</SubmitButton>
     </StyledForm>
   );
 }
