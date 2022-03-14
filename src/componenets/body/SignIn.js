@@ -29,7 +29,7 @@ const SignInForm = () => {
   const registerUser = async (e) => {
     e.preventDefault();
     try {
-      let data = await fetch("http://localhost:4000/api/users/logIn", {
+      let data = await fetch("http://localhost:4000/api/users/login", {
         method: "POST",
         mode: "cors",
         headers: {
