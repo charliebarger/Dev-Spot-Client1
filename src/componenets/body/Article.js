@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import brainImg from "../../assets/images/brain.jpg";
 import CommentSection from "./Comments/CommentWrapper";
-
+import { useParams } from "react-router-dom";
 const StyledArticle = styled.article`
   max-width: 650px;
   margin: auto;
@@ -43,6 +43,32 @@ const ArticleContent = styled.p`
 `;
 
 const Article = () => {
+  let params = useParams();
+  useEffect(() => {
+    const getPost = async () => {
+      try {
+        let data = await fetch(`http://localhost:4000/api/posts/${params.id}`, {
+          method: "GET",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const response = await data.json();
+        if (data.ok) {
+          console.log(response.post);
+        } else {
+          // should navigate to error page
+          throw new Error(response.error);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getPost();
+  }, []);
+
+  console.log(params.id);
   return (
     <StyledArticle>
       <StyledArticleHeader>My First Blog Post</StyledArticleHeader>
