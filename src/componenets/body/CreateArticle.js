@@ -4,6 +4,7 @@ import FormHeader from "./Form/FormHeader";
 import FormInput from "./Form/FormInput";
 import FormLabel from "./Form/FormLabel";
 import styled from "styled-components";
+import StyledErrorMessage from "../utils/StyledErrorMessage";
 import { useNavigate } from "react-router-dom";
 import Button from "../utils/Button";
 const StyledForm = styled.form`
@@ -17,7 +18,8 @@ const StyledForm = styled.form`
 `;
 
 const SubmitButton = styled(Button)`
-  margin: 1rem 0;
+  margin: ${(props) => (props.error ? "0" : "1rem 0")};
+  margin-top: ${(props) => (props.error ? "0" : "1rem")};
   background: black;
   color: white;
   border: black solid 1px;
@@ -28,11 +30,16 @@ const SubmitButton = styled(Button)`
   }
 `;
 
+const ErrorWrapper = styled.div`
+  margin-top: 1.5rem;
+`;
+
 export default function ArticleCreator() {
   const navigate = useNavigate();
   const editorRef = useRef();
   const [title, setTitle] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [error, setError] = useState("");
   const addPost = async (e) => {
     e.preventDefault();
     try {
@@ -50,9 +57,11 @@ export default function ArticleCreator() {
         }),
       });
       const response = await data.json();
+      console.log(data.body);
       if (data.ok) {
         navigate("/");
       } else {
+        setError(response.error);
         throw new Error(response.error);
       }
     } catch (error) {
@@ -105,7 +114,14 @@ export default function ArticleCreator() {
             "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
         }}
       />
-      <SubmitButton type="submit">Submit</SubmitButton>
+      {error && (
+        <ErrorWrapper>
+          <StyledErrorMessage>{error}</StyledErrorMessage>
+        </ErrorWrapper>
+      )}
+      <SubmitButton error={error} type="submit">
+        Submit
+      </SubmitButton>
     </StyledForm>
   );
 }
