@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import React from "react";
-import brainImg from "../../../../assets/images/brain.jpg";
-
-const StyledArticleLink = styled.a`
+import { Link } from "react-router-dom";
+const StyledArticleLink = styled(Link)`
   display: block;
   max-width: 765px;
   margin: auto;
+  color: black;
 `;
 
 const StyledArticle = styled.article`
@@ -67,7 +67,7 @@ const StyledArticleBody = styled.p`
 
 const ArticlePreview = (props) => {
   return (
-    <StyledArticleLink>
+    <StyledArticleLink to={`/article/${props.id}`}>
       <StyledArticle>
         <StyledArticleInfo>
           <StyledTopWrapper>
@@ -80,7 +80,7 @@ const ArticlePreview = (props) => {
         </StyledArticleInfo>
         <StyledImageWrapperSection>
           <StyledImageWrapper>
-            <StyledImage src={brainImg}></StyledImage>
+            <StyledImage src={props.imageUrl}></StyledImage>
           </StyledImageWrapper>
         </StyledImageWrapperSection>
       </StyledArticle>

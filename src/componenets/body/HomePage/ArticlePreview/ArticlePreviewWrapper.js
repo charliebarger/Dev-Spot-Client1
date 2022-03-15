@@ -55,12 +55,16 @@ const ArticlePreviewWrapper = () => {
     <StyledArticleWrapper>
       <StyledArticleH2>Articles</StyledArticleH2>
       {articles.map((article) => {
+        console.log(article._id);
         return (
           <ArticlePreview
+            key={article._id}
+            id={article._id}
             title={article.title}
             author={article.user.firstName + " " + article.user.lastName}
             date={article.date}
             body={article.body}
+            imageUrl={article.imageUrl}
           ></ArticlePreview>
         );
       })}
