@@ -5,13 +5,8 @@ import FormLabel from "./Form/FormLabel";
 import FormInput from "./Form/FormInput";
 import SubmitButton from "./Form/SubmitButton";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import { UserContext } from "../utils/UserContext";
-const StyledErrorMessage = styled.span`
-  display: block;
-  color: red;
-  margin-bottom: 1.5rem;
-`;
+import StyledErrorMessage from "../utils/StyledErrorMessage";
 
 const SignInForm = () => {
   const [email, setEmail] = useState("");
