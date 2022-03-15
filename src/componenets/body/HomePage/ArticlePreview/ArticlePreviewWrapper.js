@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import ArticlePreview from "./ArticlePreview";
+import { type } from "@testing-library/user-event/dist/type";
+import { stripHtml } from "string-strip-html";
 
 const StyledArticleWrapper = styled.section`
   padding: 1.5rem;
@@ -15,9 +17,18 @@ const StyledArticleH2 = styled.h2`
 `;
 
 const ArticlePreviewWrapper = () => {
-  const [articles, setArticles] = useState();
+  const [articles, setArticles] = useState([]);
   useEffect(() => {
-    console.log("here");
+    const createBodyPreview = (articles) => {
+      articles.forEach((article) => {
+        const strippedPtag = /<p>(.*?)<\/p>/g.exec(article.body);
+        const articlePreview = strippedPtag
+          ? stripHtml(strippedPtag[1]).result.substring(0, 140) + "..."
+          : "No Preview Available...";
+        article.body = articlePreview;
+      });
+    };
+
     const getPosts = async (e) => {
       try {
         let data = await fetch("http://localhost:4000/api/posts", {
@@ -29,7 +40,8 @@ const ArticlePreviewWrapper = () => {
         });
         const response = await data.json();
         if (data.ok) {
-          console.log(response);
+          createBodyPreview(response);
+          setArticles(response);
         } else {
           throw new Error(response.error);
         }
@@ -39,11 +51,19 @@ const ArticlePreviewWrapper = () => {
     };
     getPosts();
   }, []);
-
   return (
     <StyledArticleWrapper>
       <StyledArticleH2>Articles</StyledArticleH2>
-      <ArticlePreview />
+      {articles.map((article) => {
+        return (
+          <ArticlePreview
+            title={article.title}
+            author={article.user.firstName + " " + article.user.lastName}
+            date={article.date}
+            body={article.body}
+          ></ArticlePreview>
+        );
+      })}
     </StyledArticleWrapper>
   );
 };

@@ -51,7 +51,6 @@ export default function ArticleCreator() {
       });
       const response = await data.json();
       if (data.ok) {
-        console.log(response);
         navigate("/");
       } else {
         throw new Error(response.error);
@@ -60,7 +59,6 @@ export default function ArticleCreator() {
       console.log(error);
     }
   };
-
   return (
     <StyledForm onSubmit={addPost}>
       <FormHeader>Create Blog Post</FormHeader>

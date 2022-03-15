@@ -49,6 +49,7 @@ const StyledTopWrapper = styled.div`
 `;
 const StyledAuthorName = styled.address`
   font-style: normal;
+  text-transform: capitalize;
   color: ${({ theme }) => theme.colors.primary};
 `;
 const StyledDate = styled.time``;
@@ -64,21 +65,18 @@ const StyledArticleBody = styled.p`
   margin-top: 0.5rem;
 `;
 
-const ArticlePreview = () => {
+const ArticlePreview = (props) => {
   return (
     <StyledArticleLink>
       <StyledArticle>
         <StyledArticleInfo>
           <StyledTopWrapper>
-            <StyledAuthorName>Charles Barger</StyledAuthorName>
+            <StyledAuthorName>{props.author}</StyledAuthorName>
             <span>|</span>
-            <StyledDate>01/24/1996</StyledDate>
+            <StyledDate>{props.date}</StyledDate>
           </StyledTopWrapper>
-          <StyledArticleHeader>My First Blog Post</StyledArticleHeader>
-          <StyledArticleBody>
-            If you’re like me — a tech savvy individual (that also happens to be
-            a software engineer) or just a casual technology user, then..
-          </StyledArticleBody>
+          <StyledArticleHeader>{props.title}</StyledArticleHeader>
+          <StyledArticleBody>{props.body}</StyledArticleBody>
         </StyledArticleInfo>
         <StyledImageWrapperSection>
           <StyledImageWrapper>
