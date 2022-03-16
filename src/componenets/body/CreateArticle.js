@@ -42,6 +42,7 @@ export default function ArticleCreator() {
   const [error, setError] = useState("");
   const addPost = async (e) => {
     e.preventDefault();
+    const htmlToString = editorRef.current.getContent();
     try {
       let data = await fetch("http://localhost:4000/api/posts", {
         method: "POST",
@@ -53,11 +54,11 @@ export default function ArticleCreator() {
         body: JSON.stringify({
           title,
           imageUrl,
-          postBody: editorRef.current.getContent(),
+          postBody: htmlToString,
         }),
       });
       const response = await data.json();
-      console.log(data.body);
+      console.log(response);
       if (data.ok) {
         navigate("/");
       } else {

@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import brainImg from "../../assets/images/brain.jpg";
 import CommentSection from "./Comments/CommentWrapper";
 import { useParams } from "react-router-dom";
+import { BallTriangle } from "react-loader-spinner";
+import parse from "html-react-parser";
 const StyledArticle = styled.article`
   max-width: 650px;
   margin: auto;
@@ -19,6 +21,8 @@ const StyledArticleHeader = styled.h1`
 
 const StyledAuthorName = styled.address`
   font-style: normal;
+  text-transform: capitalize;
+  color: black;
 `;
 const StyledDate = styled.time``;
 
@@ -34,18 +38,23 @@ const NameDateWrapper = styled.div`
 const ArticleImg = styled.img`
   max-width: 100%;
   height: auto;
+  background: none;
 `;
 
-const ArticleContent = styled.p`
+const ArticleContent = styled.div`
   margin: 2rem 0;
   font-family: ${({ theme }) => theme.fonts.serifPrimary};
   font-size: 1.25rem;
 `;
 
 const Article = () => {
+  const [article, setArticle] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   let params = useParams();
   useEffect(() => {
+    console.log("started use effect");
     const getPost = async () => {
+      console.log("started get post");
       try {
         let data = await fetch(`http://localhost:4000/api/posts/${params.id}`, {
           method: "GET",
@@ -56,7 +65,11 @@ const Article = () => {
         });
         const response = await data.json();
         if (data.ok) {
+          console.log("above set article");
           console.log(response.post);
+          setArticle(response.post);
+          console.log("above loaded");
+          setIsLoaded(true);
         } else {
           // should navigate to error page
           throw new Error(response.error);
@@ -66,36 +79,32 @@ const Article = () => {
       }
     };
     getPost();
-  }, []);
-
-  console.log(params.id);
-  return (
-    <StyledArticle>
-      <StyledArticleHeader>My First Blog Post</StyledArticleHeader>
-      <NameDateWrapper>
-        <StyledAuthorName>Charles Barger</StyledAuthorName>
-        <span> | </span>
-        <StyledDate>01/24/1996</StyledDate>
-      </NameDateWrapper>
-      <ArticleImg src={brainImg} />
-      <section>
-        <ArticleContent>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolor
-          adipisci expedita aliquid fugit fugiat, alias odit facere quos at rem
-          in cupiditate voluptatem officia aperiam, et, labore nihil corrupti
-          sint perferendis? Provident eos molestiae totam! Possimus, officiis
-          voluptate? Magnam sequi iste debitis blanditiis. Ad, tempore. Sint et
-          nihil molestias alias. Neque magni temporibus sunt odio nisi cum,
-          suscipit qui necessitatibus assumenda tenetur adipisci in eius sint
-          exercitationem reiciendis mollitia, quod ipsa saepe repellendus ut
-          officia. Cumque alias quibusdam, ut ad dolor placeat iusto earum illum
-          ipsum tenetur numquam beatae totam iure odit, nam deleniti rem facere!
-          Pariatur ipsam doloribus expedita.
-        </ArticleContent>
-      </section>
-      <CommentSection></CommentSection>
-    </StyledArticle>
-  );
+  }, [params]);
+  console.log("render");
+  if (!isLoaded) {
+    return (
+      // <BallTriangle height="100" width="100" color="grey" ariaLabel="loading" />
+      <div></div>
+    );
+  } else {
+    console.log(parse(article.body));
+    return (
+      <StyledArticle>
+        <StyledArticleHeader></StyledArticleHeader>
+        <NameDateWrapper>
+          <StyledAuthorName>
+            {article.user.firstName + " " + article.user.lastName}
+          </StyledAuthorName>
+          <span> • </span>
+          <StyledDate>{article.date}</StyledDate>
+        </NameDateWrapper>
+        <ArticleImg src={article.imageUrl} />
+        <section>
+          <ArticleContent>{parse(article.body)}</ArticleContent>
+        </section>
+        <CommentSection></CommentSection>
+      </StyledArticle>
+    );
+  }
 };
-
 export default Article;
