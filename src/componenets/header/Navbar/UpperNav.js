@@ -32,7 +32,7 @@ const NavWrapper = styled.div`
 
 const UpperNav = () => {
   const { loggedIn } = useContext(UserContext);
-
+  console.log(loggedIn);
   return (
     <StyledUpperNavWrapper>
       <NavWrapper>
