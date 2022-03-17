@@ -39,6 +39,8 @@ const ArticleImg = styled.img`
   max-width: 100%;
   height: auto;
   background: none;
+  display: block;
+  margin: auto;
 `;
 
 const ArticleContent = styled.div`
