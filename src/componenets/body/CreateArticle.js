@@ -42,6 +42,7 @@ export default function ArticleCreator() {
   const [error, setError] = useState("");
   const addPost = async (e) => {
     e.preventDefault();
+    setError(false);
     const htmlToString = editorRef.current.getContent();
     try {
       let data = await fetch("http://localhost:4000/api/posts", {
