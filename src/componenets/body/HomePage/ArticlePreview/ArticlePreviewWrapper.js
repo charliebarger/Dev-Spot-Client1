@@ -21,11 +21,15 @@ const ArticlePreviewWrapper = () => {
   useEffect(() => {
     const createBodyPreview = (articles) => {
       articles.forEach((article) => {
-        const strippedPtag = /<p>(.*?)<\/p>/g.exec(article.body);
-        const articlePreview = strippedPtag
-          ? stripHtml(strippedPtag[1]).result.substring(0, 140) + "..."
+        const pTags = article.body.match(/<p>(.*?)<\/p>/g);
+
+        let longestPTag = pTags
+          ? pTags.reduce((a, b) => {
+              return a.length > b.length ? a : b;
+            })
           : "No Preview Available...";
-        article.body = articlePreview;
+
+        article.body = stripHtml(longestPTag).result.substring(0, 140) + "...";
       });
     };
 
@@ -55,7 +59,6 @@ const ArticlePreviewWrapper = () => {
     <StyledArticleWrapper>
       <StyledArticleH2>Articles</StyledArticleH2>
       {articles.map((article) => {
-        console.log(article._id);
         return (
           <ArticlePreview
             key={article._id}
