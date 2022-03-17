@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import React from "react";
 import { Link } from "react-router-dom";
 const StyledArticleLink = styled(Link)`
@@ -6,14 +6,24 @@ const StyledArticleLink = styled(Link)`
   max-width: 765px;
   margin: auto;
   color: black;
+  transition: 0.5s;
+  &:hover {
+    background: hsla(0, 0%, 89%, 1);
+  }
 `;
 
 const StyledArticle = styled.article`
-  padding: 1rem 0;
-  margin: 1rem 0;
+  padding: 1rem;
+  margin: 0;
   border-bottom: 1px solid ${({ theme }) => theme.colors.fontColor2};
   display: flex;
   gap: 2rem;
+
+  ${({ index }) =>
+    index == 0 &&
+    css`
+      border-top: 1px solid ${({ theme }) => theme.colors.fontColor2};
+    `}
 `;
 
 const StyledArticleInfo = styled.section`
@@ -66,9 +76,10 @@ const StyledArticleBody = styled.p`
 `;
 
 const ArticlePreview = (props) => {
+  console.log(props.index);
   return (
-    <StyledArticleLink to={`/article/${props.id}`}>
-      <StyledArticle>
+    <StyledArticleLink className="exactly" to={`/article/${props.id}`}>
+      <StyledArticle index={props.index}>
         <StyledArticleInfo>
           <StyledTopWrapper>
             <StyledAuthorName>{props.author}</StyledAuthorName>

@@ -10,10 +10,10 @@ const StyledArticleWrapper = styled.section`
 
 const StyledArticleH2 = styled.h2`
   font-size: 2.5rem;
-  margin: 1rem 0;
+  margin: 2.5rem 0;
   padding: 1rem 0;
   color: black;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.fontColor2};
+  border-bottom: 3px solid black;
 `;
 
 const ArticlePreviewWrapper = () => {
@@ -58,16 +58,17 @@ const ArticlePreviewWrapper = () => {
   return (
     <StyledArticleWrapper>
       <StyledArticleH2>Articles</StyledArticleH2>
-      {articles.map((article) => {
+      {articles.map((article, index) => {
         return (
           <ArticlePreview
             key={article._id}
             id={article._id}
             title={article.title}
             author={article.user.firstName + " " + article.user.lastName}
-            date={article.date}
+            date={article.shortDate}
             body={article.body}
             imageUrl={article.imageUrl}
+            index={index}
           ></ArticlePreview>
         );
       })}
