@@ -6,7 +6,9 @@ const theme = {
   mediaQueries: {
     below850: maxWidth(850),
     below700: maxWidth(700),
+    below600: maxWidth(600),
     below550: maxWidth(550),
+    below500: maxWidth(500),
     below400: maxWidth(400),
   },
   colors: {
