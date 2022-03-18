@@ -22,18 +22,23 @@ const SubmitButton = styled(Button)`
 
 const CommentBox = ({ articleId }) => {
   const [comment, setComment] = useState("");
+
   const submitComment = async (e) => {
     e.preventDefault();
+    setComment("");
     try {
-      let data = await fetch("http://localhost:4000/api/users/login", {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: localStorage.getItem(`token`),
-        },
-        body: JSON.stringify({ comment, article: articleId }),
-      });
+      let data = await fetch(
+        `http://localhost:4000/api/posts/${articleId}/comments`,
+        {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: localStorage.getItem(`token`),
+          },
+          body: JSON.stringify({ comment }),
+        }
+      );
       const response = await data.json();
       if (data.ok) {
         // localStorage.setItem("token", response.token);
