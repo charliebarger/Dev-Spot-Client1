@@ -62,13 +62,13 @@ const StyledPaddingWrapper = styled.div`
 const Article = () => {
   const [article, setArticle] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
-  let params = useParams();
+  let articleId = useParams().id;
   useEffect(() => {
     console.log("started use effect");
     const getPost = async () => {
       console.log("started get post");
       try {
-        let data = await fetch(`http://localhost:4000/api/posts/${params.id}`, {
+        let data = await fetch(`http://localhost:4000/api/posts/${articleId}`, {
           method: "GET",
           mode: "cors",
           headers: {
@@ -91,7 +91,7 @@ const Article = () => {
       }
     };
     getPost();
-  }, [params]);
+  }, [articleId]);
   console.log("render");
   if (!isLoaded) {
     return (
@@ -124,7 +124,7 @@ const Article = () => {
             <ArticleContent>{parse(article.body)}</ArticleContent>
           </section>
         </StyledPaddingWrapper>
-        <CommentSection></CommentSection>
+        <CommentSection articleId={articleId}></CommentSection>
       </StyledArticle>
     );
   }

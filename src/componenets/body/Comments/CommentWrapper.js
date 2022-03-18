@@ -16,11 +16,11 @@ const StyledCommentSection = styled.section`
   border-radius: 0 0 5px 5px;
 `;
 
-const CommentSection = () => {
+const CommentSection = ({ articleId }) => {
   return (
     <StyledCommentSection>
       <StyledCommentHeader>Comments (4)</StyledCommentHeader>
-      <CommentBox />
+      <CommentBox articleId={articleId} />
       <Comment />
     </StyledCommentSection>
   );

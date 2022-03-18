@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import React from "react";
+import React, { useState } from "react";
 import Button from "../../utils/Button";
-
+import { useParams } from "react-router-dom";
 const StyledTextArea = styled.textarea`
   width: 100%;
   padding: 0.75rem;
@@ -20,10 +20,37 @@ const SubmitButton = styled(Button)`
   }
 `;
 
-const CommentBox = () => {
+const CommentBox = ({ articleId }) => {
+  const [comment, setComment] = useState("");
+  const submitComment = async (e) => {
+    e.preventDefault();
+    try {
+      let data = await fetch("http://localhost:4000/api/users/login", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem(`token`),
+        },
+        body: JSON.stringify({ comment, article: articleId }),
+      });
+      const response = await data.json();
+      if (data.ok) {
+        // localStorage.setItem("token", response.token);
+      } else {
+        // throw new Error(response.error);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <form>
-      <StyledTextArea></StyledTextArea>
+    <form onSubmit={submitComment}>
+      <StyledTextArea
+        value={comment}
+        onChange={(e) => setComment(e.target.value)}
+      />
       <SubmitButton>Comment</SubmitButton>
     </form>
   );
