@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
+import StyledErrorMessage from "../utils/StyledErrorMessage";
 import Form from "./Form/Form";
 import FormHeader from "./Form/FormHeader";
 import FormLabel from "./Form/FormLabel";
@@ -13,6 +14,7 @@ const SignUpForm = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const { loggedIn, setLoggedIn } = useContext(UserContext);
   const navigate = useNavigate();
@@ -39,6 +41,9 @@ const SignUpForm = () => {
     });
     answer = await answer.json();
     console.log(answer);
+    if (answer.error) {
+      setError(answer.error);
+    }
   };
 
   return (
@@ -103,6 +108,7 @@ const SignUpForm = () => {
       ></FormInput>
       <RequiredFields />
       <InternalLink>Already have an Acount? Sign In</InternalLink>
+      {error && <StyledErrorMessage>{error}</StyledErrorMessage>}
       <SubmitButton></SubmitButton>
     </Form>
   );
