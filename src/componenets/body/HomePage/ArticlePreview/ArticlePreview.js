@@ -18,12 +18,14 @@ const StyledArticle = styled.article`
   border-bottom: 1px solid ${({ theme }) => theme.colors.fontColor2};
   display: flex;
   gap: 2rem;
-
   ${({ index }) =>
-    index == 0 &&
+    index === 0 &&
     css`
       border-top: 1px solid ${({ theme }) => theme.colors.fontColor2};
     `}
+  @media ${({ theme }) => theme.mediaQueries.below425} {
+    gap: 1rem;
+  }
 `;
 
 const StyledArticleInfo = styled.section`
@@ -42,6 +44,10 @@ const StyledImageWrapper = styled.div`
   @media ${({ theme }) => theme.mediaQueries.below550} {
     width: 80px;
     height: 80px;
+  }
+  @media ${({ theme }) => theme.mediaQueries.below425} {
+    width: 60px;
+    height: 60px;
   }
 `;
 
@@ -62,17 +68,33 @@ const StyledAuthorName = styled.address`
   text-transform: capitalize;
   color: ${({ theme }) => theme.colors.primary};
 `;
-const StyledDate = styled.time``;
+const StyledDate = styled.time`
+  display: block;
+  @media ${({ theme }) => theme.mediaQueries.below425} {
+    display: none;
+  }
+`;
 
 const StyledArticleHeader = styled.h3`
   font-weight: 500;
   margin-bottom: 0;
+  text-transform: capitalize;
 `;
 
 const StyledArticleBody = styled.p`
   display: block;
   font-family: ${({ theme }) => theme.fonts.serifPrimary};
   margin-top: 0.5rem;
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: none;
+  @media ${({ theme }) => theme.mediaQueries.below425} {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 190px;
+  }
 `;
 
 const ArticlePreview = (props) => {
@@ -83,15 +105,23 @@ const ArticlePreview = (props) => {
         <StyledArticleInfo>
           <StyledTopWrapper>
             <StyledAuthorName>{props.author}</StyledAuthorName>
-            <span>|</span>
-            <StyledDate>{props.date}</StyledDate>
+            <StyledDate>| {props.date}</StyledDate>
           </StyledTopWrapper>
           <StyledArticleHeader>{props.title}</StyledArticleHeader>
           <StyledArticleBody>{props.body}</StyledArticleBody>
         </StyledArticleInfo>
         <StyledImageWrapperSection>
           <StyledImageWrapper>
-            <StyledImage src={props.imageUrl}></StyledImage>
+            <StyledImage
+              src={props.imageUrl}
+              alt={"Article Thumbnail"}
+              onError={({ currentTarget }) => {
+                currentTarget.onerror = null;
+                currentTarget.src =
+                  "https://static.vecteezy.com/system/resources/previews/002/811/419/original/404-error-programming-vector.jpg";
+                currentTarget.alt = "image not found";
+              }}
+            ></StyledImage>
           </StyledImageWrapper>
         </StyledImageWrapperSection>
       </StyledArticle>

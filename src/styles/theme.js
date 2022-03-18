@@ -9,7 +9,7 @@ const theme = {
     below600: maxWidth(600),
     below550: maxWidth(550),
     below500: maxWidth(500),
-    below400: maxWidth(400),
+    below425: maxWidth(425),
   },
   colors: {
     primary: `hsla(0, 0%, 0%, 1)`,
