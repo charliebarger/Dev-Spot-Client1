@@ -8,15 +8,17 @@ import parse from "html-react-parser";
 const StyledArticle = styled.article`
   max-width: 650px;
   margin: auto;
-  padding: 2rem;
   border-radius: 5px;
   box-shadow: 3px 3px 10px grey;
+  background: white;
 `;
 
 const StyledArticleHeader = styled.h1`
   margin: 0px;
   text-align: center;
-  font-weight: 400;
+  font-weight: 600;
+  text-transform: capitalize;
+  font-size: 2.5rem;
 `;
 
 const StyledAuthorName = styled.address`
@@ -24,15 +26,20 @@ const StyledAuthorName = styled.address`
   text-transform: capitalize;
   color: black;
 `;
-const StyledDate = styled.time``;
+const StyledDate = styled.time`
+  font-size: 0.75rem;
+`;
 
 const NameDateWrapper = styled.div`
   margin: 1rem 0;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 0.25rem;
+  gap: 0.5rem;
   align-items: center;
   color: ${({ theme }) => theme.colors.fontColor2};
+  flex-direction: column;
+  margin-top: 0.5rem;
 `;
 
 const ArticleImg = styled.img`
@@ -46,7 +53,10 @@ const ArticleImg = styled.img`
 const ArticleContent = styled.div`
   margin: 2rem 0;
   font-family: ${({ theme }) => theme.fonts.serifPrimary};
-  font-size: 1.25rem;
+`;
+
+const StyledPaddingWrapper = styled.div`
+  padding: 2rem;
 `;
 
 const Article = () => {
@@ -92,27 +102,28 @@ const Article = () => {
     console.log(parse(article.body));
     return (
       <StyledArticle>
-        <StyledArticleHeader></StyledArticleHeader>
-        <NameDateWrapper>
-          <StyledAuthorName>
-            {article.user.firstName + " " + article.user.lastName}
-          </StyledAuthorName>
-          <span> • </span>
-          <StyledDate>{article.date}</StyledDate>
-        </NameDateWrapper>
-        <ArticleImg
-          src={article.imageUrl}
-          alt={"Article Thumbnail"}
-          onError={({ currentTarget }) => {
-            currentTarget.onerror = null; //
-            currentTarget.src =
-              "https://static.vecteezy.com/system/resources/previews/002/811/419/original/404-error-programming-vector.jpg";
-            currentTarget.alt = "image not found";
-          }}
-        />
-        <section>
-          <ArticleContent>{parse(article.body)}</ArticleContent>
-        </section>
+        <StyledPaddingWrapper>
+          <StyledArticleHeader>{article.title}</StyledArticleHeader>
+          <NameDateWrapper>
+            <StyledAuthorName>
+              {article.user.firstName + " " + article.user.lastName}
+            </StyledAuthorName>
+            <StyledDate>{article.date}</StyledDate>
+          </NameDateWrapper>
+          <ArticleImg
+            src={article.imageUrl}
+            alt={"Article Thumbnail"}
+            onError={({ currentTarget }) => {
+              currentTarget.onerror = null; //
+              currentTarget.src =
+                "https://static.vecteezy.com/system/resources/previews/002/811/419/original/404-error-programming-vector.jpg";
+              currentTarget.alt = "image not found";
+            }}
+          />
+          <section>
+            <ArticleContent>{parse(article.body)}</ArticleContent>
+          </section>
+        </StyledPaddingWrapper>
         <CommentSection></CommentSection>
       </StyledArticle>
     );
