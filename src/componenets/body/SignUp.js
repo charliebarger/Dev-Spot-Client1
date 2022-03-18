@@ -16,7 +16,7 @@ const SignUpForm = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const { loggedIn, setLoggedIn } = useContext(UserContext);
+  const { loggedIn } = useContext(UserContext);
   const navigate = useNavigate();
   useEffect(() => {
     if (loggedIn) {
@@ -43,6 +43,8 @@ const SignUpForm = () => {
     console.log(answer);
     if (answer.error) {
       setError(answer.error);
+    } else {
+      navigate("/signIn");
     }
   };
 
