@@ -20,13 +20,15 @@ const StyledForm = styled.form`
 const SubmitButton = styled(Button)`
   margin: ${(props) => (props.error ? "0" : "1rem 0")};
   margin-top: ${(props) => (props.error ? "0" : "1rem")};
-  background: black;
+  margin-left: ${({ blue }) => (blue ? "1rem" : "0")};
+  background: ${({ blue, theme }) => (blue ? theme.colors.logoColor : "black")};
   color: white;
-  border: black solid 1px;
+  border: ${({ blue, theme }) => (blue ? theme.colors.logoColor : "black")}
+    solid 1px;
   transition: 0.25s;
   &:hover {
     background: white;
-    color: black;
+    color: ${({ blue, theme }) => (blue ? theme.colors.logoColor : "black")};
   }
 `;
 
@@ -41,11 +43,12 @@ export default function ArticleCreator() {
   const [imageUrl, setImageUrl] = useState("");
   const [error, setError] = useState("");
   const addPost = async (e) => {
+    const fetchAction = e.nativeEvent.submitter.name;
     e.preventDefault();
     setError(false);
     const htmlToString = editorRef.current.getContent();
     try {
-      let data = await fetch("http://localhost:4000/api/posts", {
+      let data = await fetch(`http://localhost:4000/api/posts/${fetchAction}`, {
         method: "POST",
         mode: "cors",
         headers: {
@@ -121,8 +124,11 @@ export default function ArticleCreator() {
           <StyledErrorMessage>{error}</StyledErrorMessage>
         </ErrorWrapper>
       )}
-      <SubmitButton error={error} type="submit">
-        Submit
+      <SubmitButton name="" error={error} type="submit">
+        Publish
+      </SubmitButton>
+      <SubmitButton name="draft" blue error={error}>
+        Save Draft
       </SubmitButton>
     </StyledForm>
   );
