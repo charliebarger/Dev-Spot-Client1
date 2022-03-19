@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import SignInForm from "./SignIn";
 import MuteBody from "./MuteBody";
-
+import Dashboard from "./Dashboard";
 import HomePage from "./HomePage/HomePage";
 import ArticleCreator from "./CreateArticle";
 import Article from "./Article";
@@ -27,6 +27,7 @@ const Body = () => {
         <Route path={"/"} element={<HomePage />} />
         <Route path={"/signUp"} element={<SignUpForm />} />
         <Route path={"/signIn"} element={<SignInForm />} />
+        <Route path={"/dashboard"} element={<Dashboard />} />
         <Route path={"/article/:id"} element={<Article />} />
         <Route
           path="/createArticle"
