@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import CommentBox from "./CommentBox";
 import Comment from "./Comment";
 const StyledCommentHeader = styled.h4`
@@ -17,11 +17,51 @@ const StyledCommentSection = styled.section`
 `;
 
 const CommentSection = ({ articleId }) => {
+  const [comments, setComments] = useState([]);
+
+  const getComments = useCallback(async () => {
+    try {
+      let data = await fetch(
+        `http://localhost:4000/api/posts/${articleId}/comments`,
+        {
+          method: "GET",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+        []
+      );
+      const response = await data.json();
+      console.log(response);
+      if (data.ok) {
+        setComments(response);
+      } else {
+        throw new Error(response.error);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, [articleId]);
+
+  useEffect(() => {
+    getComments();
+  }, [getComments]);
+
   return (
     <StyledCommentSection>
-      <StyledCommentHeader>Comments (4)</StyledCommentHeader>
-      <CommentBox articleId={articleId} />
-      <Comment />
+      <StyledCommentHeader>Comments ({comments.length})</StyledCommentHeader>
+      <CommentBox articleId={articleId} getComments={getComments} />
+      {comments.map((commentData) => {
+        return (
+          <Comment
+            body={commentData.comment}
+            name={commentData.user.firstName + " " + commentData.user.lastName}
+            date={commentData.date}
+            key={commentData._id}
+          />
+        );
+      })}
     </StyledCommentSection>
   );
 };

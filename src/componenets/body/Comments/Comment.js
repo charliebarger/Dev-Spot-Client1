@@ -11,6 +11,7 @@ const StyledTopWrapper = styled.div`
 const StyledAuthorName = styled.address`
   font-style: normal;
   color: ${({ theme }) => theme.colors.primary};
+  text-transform: capitalize;
 `;
 const StyledDate = styled.time``;
 
@@ -24,15 +25,15 @@ const StyledComment = styled.p`
   font-size: 1rem;
 `;
 
-const Comment = () => {
+const Comment = ({ body, name, date }) => {
   return (
     <CommentWrapper>
       <StyledTopWrapper>
-        <StyledAuthorName>Charles Barger</StyledAuthorName>
+        <StyledAuthorName>{name}</StyledAuthorName>
         <span>|</span>
-        <StyledDate>01/24/1996</StyledDate>
+        <StyledDate>{date}</StyledDate>
       </StyledTopWrapper>
-      <StyledComment>This Article Sucks!!</StyledComment>
+      <StyledComment>{body}</StyledComment>
     </CommentWrapper>
   );
 };

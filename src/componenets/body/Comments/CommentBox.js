@@ -20,7 +20,7 @@ const SubmitButton = styled(Button)`
   }
 `;
 
-const CommentBox = ({ articleId }) => {
+const CommentBox = ({ articleId, getComments }) => {
   const [comment, setComment] = useState("");
 
   const submitComment = async (e) => {
@@ -41,9 +41,9 @@ const CommentBox = ({ articleId }) => {
       );
       const response = await data.json();
       if (data.ok) {
-        // localStorage.setItem("token", response.token);
+        getComments();
       } else {
-        // throw new Error(response.error);
+        Error(response.error);
       }
     } catch (error) {
       console.log(error);
