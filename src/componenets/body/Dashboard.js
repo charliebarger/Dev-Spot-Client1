@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Rings } from "react-loader-spinner";
+import Button from "../utils/Button";
 const StyledHeader = styled.h1`
   text-align: center;
   font-size: 2.25rem;
@@ -52,10 +53,6 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const StyledArticleAnchor = styled.a`
-  padding: 5rem;
-`;
-
 const StyledArticle = styled.article`
   display: flex;
   flex-direction: column;
@@ -65,7 +62,60 @@ const StyledArticle = styled.article`
   box-shadow: 10px 5px 10px grey;
   border-radius: 5px;
   border: black solid 2px;
+  position: relative;
+
+  &:hover {
+    > div:first-child {
+      transition: 0.5s all ease-in-out;
+      background: hsla(0, 0%, 0%, 0.8);
+    }
+    > div:first-child button {
+      transition: 0.5s opacity ease-in-out;
+      opacity: 1;
+    }
+  }
 `;
+
+const StyledShadow = styled.div`
+  background: hsla(0, 0%, 50%, 0);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 2.5px;
+  //   display: flex;
+  //   flex-direction: column;
+  //   gap: 32px;
+  //   justify-content: center;
+  //   align-items: center;
+`;
+
+const StyledEditButton = styled(Button)`
+  transition: 0.5s all ease-in-out;
+  background: hsl(215, 100%, 50%);
+  color: white;
+  opacity: 0;
+  font-size: 1.25rem;
+  transition: 0.5s transform ease-in-out;
+  &:hover {
+    background: hsl(215, 100%, 59%);
+    transform: translateY(-3px);
+  }
+`;
+
+const StyledDeleteButton = styled(Button)`
+  background: hsl(0, 100%, 50%);
+  color: white;
+  opacity: 0;
+  font-size: 1.25rem;
+  transition: 0.5s transform ease-in-out;
+  &:hover {
+    background: hsl(0, 100%, 59%);
+    transform: translateY(-3px);
+  }
+`;
+
 const StyledTopDivWrapper = styled.div`
   display: flex;
   flex: 1;
@@ -91,7 +141,7 @@ const StyledArticleHeader = styled.h4`
   font-weight: 400;
   margin: 0;
   padding: 0.75rem;
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid black;
 `;
 
 const StyledSpan = styled.span`
@@ -105,6 +155,16 @@ const StyledSpan = styled.span`
 
 const StyledFooter = styled.footer`
   background: black;
+`;
+
+const StyledButtonWrapper = styled.div`
+  width: max-content;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  justify-content: center;
+  height: 100%;
 `;
 
 const Dashboard = () => {
@@ -140,19 +200,24 @@ const Dashboard = () => {
       <section>
         <StyledSubHeader>Published Posts</StyledSubHeader>
         <StyledMargin>
-          <StyledArticleAnchor>
-            <StyledArticle>
-              <StyledTopDivWrapper>
-                <StyledArticleHeader>
-                  The Odin Project The Odin Project
-                </StyledArticleHeader>
-                <StyledImgWrapper></StyledImgWrapper>
-              </StyledTopDivWrapper>
-              <StyledFooter>
-                <StyledSpan>Last Edited: 10/26/2021</StyledSpan>
-              </StyledFooter>
-            </StyledArticle>
-          </StyledArticleAnchor>
+          <StyledArticle>
+            <StyledShadow>
+              <StyledButtonWrapper>
+                <StyledEditButton>Edit</StyledEditButton>
+                <StyledDeleteButton>Delete</StyledDeleteButton>
+              </StyledButtonWrapper>
+            </StyledShadow>
+            <StyledTopDivWrapper>
+              <StyledArticleHeader>
+                The Odin Project The Odin Project
+              </StyledArticleHeader>
+              <StyledImgWrapper></StyledImgWrapper>
+            </StyledTopDivWrapper>
+            <StyledFooter>
+              <StyledSpan>Last Edited: 10/26/2021</StyledSpan>
+            </StyledFooter>
+          </StyledArticle>
+
           <StyledImageSection>
             <StyledWrapper>
               <Rings
