@@ -246,6 +246,7 @@ const Dashboard = () => {
               return (
                 <DashboardArticlePreview
                   post
+                  articleId={post.id}
                   image={post.imageUrl}
                   title={post.title}
                   shortDate={post.shortDate}

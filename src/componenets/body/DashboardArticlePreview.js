@@ -152,7 +152,7 @@ const DashboardArticlePreview = (props) => {
       <StyledShadow>
         <StyledButtonWrapper>
           {props.post && (
-            <Link to="">
+            <Link to={`/article/${props.articleId}`}>
               <StyledViewButton>View</StyledViewButton>
             </Link>
           )}
