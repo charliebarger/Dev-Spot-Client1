@@ -41,9 +41,12 @@ const StyledMessage = styled.span`
 `;
 
 const StyledMargin = styled.div`
-  @media ${({ theme }) => theme.mediaQueries.below700} {
-    margin: 1rem 0.5rem;
-  }
+  padding: 1rem;
+  display: flex;
+  overflow-y: scroll;
+  gap: 1.5rem;
+  flex-wrap: no-wrap;
+  margin: 2rem 0.5rem;
 `;
 
 const StyledWrapper = styled.div`
@@ -242,6 +245,7 @@ const Dashboard = () => {
               console.log(post.imageUrl);
               return (
                 <DashboardArticlePreview
+                  post
                   image={post.imageUrl}
                   title={post.title}
                   shortDate={post.shortDate}
