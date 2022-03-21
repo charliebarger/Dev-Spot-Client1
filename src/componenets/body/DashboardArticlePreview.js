@@ -30,7 +30,8 @@ const StyledArticle = styled.article`
       transition: 0.5s all ease-in-out;
       background: hsla(0, 0%, 0%, 0.8);
     }
-    > div:first-child div {
+    > div:first-child div,
+    div:first-child button {
       transition: 0.5s opacity ease-in-out;
       opacity: 1;
     }
@@ -78,7 +79,7 @@ const StyledViewButton = styled(StyledLink)`
   }
 `;
 
-const StyledDeleteButton = styled(StyledLink)`
+const StyledDeleteButton = styled(Button)`
   background: hsl(0, 100%, 50%);
   color: white;
   opacity: 0;
@@ -146,6 +147,35 @@ const StyledButtonWrapper = styled.div`
 `;
 
 const DashboardArticlePreview = (props) => {
+  const deletePost = async (e, postId, setState) => {
+    console.log(e.target);
+
+    const fetchAction = e.target.getAttribute("name");
+    const uriSnippet = fetchAction === "draft" ? "/draft/delete" : "/delete";
+    try {
+      let data = await fetch(
+        `http://localhost:4000/api/posts${uriSnippet}/${postId}`,
+        {
+          method: "DELETE",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: localStorage.getItem(`token`),
+          },
+        }
+      );
+      const response = await data.json();
+      console.log(response);
+      if (!data.ok) {
+        throw new Error(response.error);
+      } else {
+        setState(Date.now());
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   console.log(props.image);
   return (
     <StyledArticle>
@@ -159,9 +189,19 @@ const DashboardArticlePreview = (props) => {
           <Link to="">
             <StyledEditButton>Edit</StyledEditButton>
           </Link>
-          <Link to="">
-            <StyledDeleteButton to="">Delete</StyledDeleteButton>
-          </Link>
+          <StyledDeleteButton
+            onClick={(e) => {
+              if (
+                window.confirm("Are you sure you want to delete this article?")
+              ) {
+                deletePost(e, props.articleId, props.setPosts);
+              }
+            }}
+            to=""
+            name={props.post ? "article" : "draft"}
+          >
+            Delete
+          </StyledDeleteButton>
         </StyledButtonWrapper>
       </StyledShadow>
       <StyledTopDivWrapper>

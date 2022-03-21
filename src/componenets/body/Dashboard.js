@@ -176,6 +176,7 @@ const Dashboard = () => {
   const [drafts, setDrafts] = useState("");
   const [user, setUser] = useState("");
   const [posts, setPosts] = useState("");
+  const [requestData, setRequestData] = useState(new Date());
   useEffect(() => {
     const getDrafts = async () => {
       try {
@@ -201,7 +202,7 @@ const Dashboard = () => {
       }
     };
     getDrafts();
-  }, []);
+  }, [requestData]);
 
   return (
     <section>
@@ -246,6 +247,7 @@ const Dashboard = () => {
               return (
                 <DashboardArticlePreview
                   post
+                  setPosts={setRequestData}
                   articleId={post.id}
                   image={post.imageUrl}
                   title={post.title}
