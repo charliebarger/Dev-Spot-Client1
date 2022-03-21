@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Rings } from "react-loader-spinner";
 import Button from "../utils/Button";
+import DashboardArticlePreview from "./DashboardArticlePreview";
 const StyledHeader = styled.h1`
+  text-transform: capitalize;
   text-align: center;
   font-size: 2.25rem;
   font-weight: 400;
@@ -168,83 +170,95 @@ const StyledButtonWrapper = styled.div`
 `;
 
 const Dashboard = () => {
-  //   const registerUser = async (e) => {
-  //     e.preventDefault();
-  //     try {
-  //       let data = await fetch("http://localhost:4000/api/users/login", {
-  //         method: "POST",
-  //         mode: "cors",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({ email, password }),
-  //       });
-  //       const response = await data.json();
-  //       if (data.ok) {
-  //         navigate("/");
-  //         setLoggedIn(true);
-  //         localStorage.setItem("token", response.token);
-  //       } else {
-  //         setError(response.error);
-  //         throw new Error(response.error);
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //       navigate("/signIn");
-  //     }
-  //   };
+  const [drafts, setDrafts] = useState("");
+  const [user, setUser] = useState("");
+  useEffect(() => {
+    const getDrafts = async () => {
+      try {
+        let data = await fetch("http://localhost:4000/api/users/dashboard", {
+          method: "GET",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: localStorage.getItem(`token`),
+          },
+        });
+        const response = await data.json();
+        if (data.ok) {
+          console.log(response);
+          setDrafts(response.drafts);
+          setUser(response.user);
+        } else {
+          throw new Error(response.error);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getDrafts();
+  }, []);
 
   return (
     <section>
-      <StyledHeader>Charlie Barger's Dashboard</StyledHeader>
+      <StyledHeader>
+        {user.firstName + " " + user.lastName} Dashboard
+      </StyledHeader>
       <section>
         <StyledSubHeader>Published Posts</StyledSubHeader>
         <StyledMargin>
-          <StyledArticle>
-            <StyledShadow>
-              <StyledButtonWrapper>
-                <StyledEditButton>Edit</StyledEditButton>
-                <StyledDeleteButton>Delete</StyledDeleteButton>
-              </StyledButtonWrapper>
-            </StyledShadow>
-            <StyledTopDivWrapper>
-              <StyledArticleHeader>
-                The Odin Project The Odin Project
-              </StyledArticleHeader>
-              <StyledImgWrapper></StyledImgWrapper>
-            </StyledTopDivWrapper>
-            <StyledFooter>
-              <StyledSpan>Last Edited: 10/26/2021</StyledSpan>
-            </StyledFooter>
-          </StyledArticle>
-
-          <StyledImageSection>
-            <StyledWrapper>
-              <Rings
-                height="100%"
-                width="100%"
-                ariaLabel="loading"
-                color="hsla(215,100%,50%, 1)"
-              />
-            </StyledWrapper>
-            <StyledMessage>No Published Posts</StyledMessage>
-          </StyledImageSection>
+          {drafts ? (
+            drafts.map((draft) => {
+              console.log(draft.imageUrl);
+              return (
+                <DashboardArticlePreview
+                  image={draft.imageUrl}
+                  title={draft.title}
+                  shortDate={draft.shortDate}
+                />
+              );
+            })
+          ) : (
+            <StyledImageSection>
+              <StyledWrapper>
+                <Rings
+                  height="100%"
+                  width="100%"
+                  ariaLabel="loading"
+                  color="hsla(215,100%,50%, 1)"
+                />
+              </StyledWrapper>
+              <StyledMessage>No Published Posts</StyledMessage>
+            </StyledImageSection>
+          )}
         </StyledMargin>
       </section>
       <section>
         <StyledSubHeader>Unpublished Posts</StyledSubHeader>
         <StyledMargin>
-          <StyledImageSection>
-            <StyledWrapper>
-              <Rings
-                height="100%"
-                width="100%"
-                ariaLabel="loading"
-                color="rgba(117, 117, 117, 1)"
-              />
-            </StyledWrapper>
-            <StyledMessage>No Unpublished Posts</StyledMessage>
-          </StyledImageSection>
+          {drafts ? (
+            drafts.map((draft) => {
+              console.log(draft.imageUrl);
+              return (
+                <DashboardArticlePreview
+                  image={draft.imageUrl}
+                  title={draft.title}
+                  shortDate={draft.shortDate}
+                />
+              );
+            })
+          ) : (
+            <StyledImageSection>
+              <StyledWrapper>
+                <Rings
+                  height="100%"
+                  width="100%"
+                  ariaLabel="loading"
+                  color="rgba(117, 117, 117, 1)"
+                />
+              </StyledWrapper>
+              <StyledMessage>No Published Posts</StyledMessage>
+            </StyledImageSection>
+          )}
         </StyledMargin>
       </section>
     </section>

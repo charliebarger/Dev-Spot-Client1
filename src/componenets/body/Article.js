@@ -64,9 +64,7 @@ const Article = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   let articleId = useParams().id;
   useEffect(() => {
-    console.log("started use effect");
     const getPost = async () => {
-      console.log("started get post");
       try {
         let data = await fetch(`http://localhost:4000/api/posts/${articleId}`, {
           method: "GET",
@@ -77,10 +75,7 @@ const Article = () => {
         });
         const response = await data.json();
         if (data.ok) {
-          console.log("above set article");
-          console.log(response.post);
           setArticle(response.post);
-          console.log("above loaded");
           setIsLoaded(true);
         } else {
           // should navigate to error page
