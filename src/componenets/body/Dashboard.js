@@ -173,9 +173,9 @@ const StyledButtonWrapper = styled.div`
 `;
 
 const Dashboard = () => {
-  const [drafts, setDrafts] = useState("");
+  const [drafts, setDrafts] = useState([]);
   const [user, setUser] = useState("");
-  const [posts, setPosts] = useState("");
+  const [posts, setPosts] = useState([]);
   const [requestData, setRequestData] = useState(new Date());
   useEffect(() => {
     const getDrafts = async () => {
@@ -212,36 +212,7 @@ const Dashboard = () => {
       <section>
         <StyledSubHeader>Published Posts</StyledSubHeader>
         <StyledMargin>
-          {drafts ? (
-            drafts.map((draft) => {
-              console.log(draft.imageUrl);
-              return (
-                <DashboardArticlePreview
-                  image={draft.imageUrl}
-                  title={draft.title}
-                  shortDate={draft.shortDate}
-                />
-              );
-            })
-          ) : (
-            <StyledImageSection>
-              <StyledWrapper>
-                <Rings
-                  height="100%"
-                  width="100%"
-                  ariaLabel="loading"
-                  color="hsla(215,100%,50%, 1)"
-                />
-              </StyledWrapper>
-              <StyledMessage>No Published Posts</StyledMessage>
-            </StyledImageSection>
-          )}
-        </StyledMargin>
-      </section>
-      <section>
-        <StyledSubHeader>Unpublished Posts</StyledSubHeader>
-        <StyledMargin>
-          {posts ? (
+          {posts.length > 0 ? (
             posts.map((post) => {
               console.log(post.imageUrl);
               return (
@@ -263,6 +234,35 @@ const Dashboard = () => {
                   width="100%"
                   ariaLabel="loading"
                   color="rgba(117, 117, 117, 1)"
+                />
+              </StyledWrapper>
+              <StyledMessage>No Published Posts</StyledMessage>
+            </StyledImageSection>
+          )}
+        </StyledMargin>
+      </section>
+      <section>
+        <StyledSubHeader>Unpublished Posts</StyledSubHeader>
+        <StyledMargin>
+          {drafts.length > 0 ? (
+            drafts.map((draft) => {
+              console.log(draft.imageUrl);
+              return (
+                <DashboardArticlePreview
+                  image={draft.imageUrl}
+                  title={draft.title}
+                  shortDate={draft.shortDate}
+                />
+              );
+            })
+          ) : (
+            <StyledImageSection>
+              <StyledWrapper>
+                <Rings
+                  height="100%"
+                  width="100%"
+                  ariaLabel="loading"
+                  color="hsla(215,100%,50%, 1)"
                 />
               </StyledWrapper>
               <StyledMessage>No Published Posts</StyledMessage>
