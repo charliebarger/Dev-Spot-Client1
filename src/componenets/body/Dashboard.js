@@ -52,6 +52,61 @@ const StyledWrapper = styled.div`
   }
 `;
 
+const StyledArticleAnchor = styled.a`
+  padding: 5rem;
+`;
+
+const StyledArticle = styled.article`
+  display: flex;
+  flex-direction: column;
+  height: 250px;
+  width: 250px;
+  background: white;
+  box-shadow: 10px 5px 10px grey;
+  border-radius: 5px;
+  border: black solid 2px;
+`;
+const StyledTopDivWrapper = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+`;
+
+const StyledImgWrapper = styled.div`
+  flex: 1;
+  width: 100%;
+  background: url(https://mbfn.org/wp-content/uploads/2020/09/image-coming-soon-placeholder.png)
+    no-repeat;
+  background-size: contain;
+  background-position: center;
+`;
+
+const StyledArticleHeader = styled.h4`
+  text-align: center;
+  font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  font-weight: 400;
+  margin: 0;
+  padding: 0.75rem;
+  border-bottom: 2px solid black;
+`;
+
+const StyledSpan = styled.span`
+  display: block;
+  color: white;
+  font-size: 1rem;
+  font-weight: 400;
+  margin: 0;
+  padding: 0.75rem;
+`;
+
+const StyledFooter = styled.footer`
+  background: black;
+`;
+
 const Dashboard = () => {
   //   const registerUser = async (e) => {
   //     e.preventDefault();
@@ -85,6 +140,19 @@ const Dashboard = () => {
       <section>
         <StyledSubHeader>Published Posts</StyledSubHeader>
         <StyledMargin>
+          <StyledArticleAnchor>
+            <StyledArticle>
+              <StyledTopDivWrapper>
+                <StyledArticleHeader>
+                  The Odin Project The Odin Project
+                </StyledArticleHeader>
+                <StyledImgWrapper></StyledImgWrapper>
+              </StyledTopDivWrapper>
+              <StyledFooter>
+                <StyledSpan>Last Edited: 10/26/2021</StyledSpan>
+              </StyledFooter>
+            </StyledArticle>
+          </StyledArticleAnchor>
           <StyledImageSection>
             <StyledWrapper>
               <Rings
