@@ -172,6 +172,7 @@ const StyledButtonWrapper = styled.div`
 const Dashboard = () => {
   const [drafts, setDrafts] = useState("");
   const [user, setUser] = useState("");
+  const [posts, setPosts] = useState("");
   useEffect(() => {
     const getDrafts = async () => {
       try {
@@ -188,6 +189,7 @@ const Dashboard = () => {
           console.log(response);
           setDrafts(response.drafts);
           setUser(response.user);
+          setPosts(response.posts);
         } else {
           throw new Error(response.error);
         }
@@ -235,14 +237,14 @@ const Dashboard = () => {
       <section>
         <StyledSubHeader>Unpublished Posts</StyledSubHeader>
         <StyledMargin>
-          {drafts ? (
-            drafts.map((draft) => {
-              console.log(draft.imageUrl);
+          {posts ? (
+            posts.map((post) => {
+              console.log(post.imageUrl);
               return (
                 <DashboardArticlePreview
-                  image={draft.imageUrl}
-                  title={draft.title}
-                  shortDate={draft.shortDate}
+                  image={post.imageUrl}
+                  title={post.title}
+                  shortDate={post.shortDate}
                 />
               );
             })
