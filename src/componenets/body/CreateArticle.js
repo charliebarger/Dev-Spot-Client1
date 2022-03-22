@@ -38,7 +38,6 @@ const ErrorWrapper = styled.div`
 `;
 
 export default function ArticleCreator({ draft }) {
-  console.log(draft);
   const navigate = useNavigate();
   const editorRef = useRef();
   const [title, setTitle] = useState("");
@@ -51,16 +50,27 @@ export default function ArticleCreator({ draft }) {
   useEffect(() => {
     const getPost = async () => {
       try {
-        console.log("at post");
-        let data = await fetch(`http://localhost:4000/api/posts/${articleId}`, {
-          method: "GET",
-          mode: "cors",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        console.log(draft);
+        console.log(
+          `http://localhost:4000/api/posts/${
+            draft ? "draft/" : "/"
+          }${articleId}`
+        );
+        let data = await fetch(
+          `http://localhost:4000/api/posts/${
+            draft ? "draft/" : "/"
+          }${articleId}`,
+          {
+            method: "GET",
+            mode: "cors",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
         console.log(data);
         const response = await data.json();
+        console.log(response);
         if (data.ok) {
           console.log(response.post.title);
           setTitle(response.post.title);
@@ -86,7 +96,10 @@ export default function ArticleCreator({ draft }) {
     try {
       let data;
       if (articleId) {
-        console.log("here");
+        if (draft && !fetchAction) {
+          deleteDraft();
+          addPost(fetchAction, htmlToString);
+        }
         data = await updatePost(fetchAction, htmlToString);
       } else {
         data = await addPost(fetchAction, htmlToString);
@@ -124,8 +137,35 @@ export default function ArticleCreator({ draft }) {
     }
   };
 
+  const deleteDraft = async () => {
+    try {
+      let data = await fetch(
+        `http://localhost:4000/api/posts/draft/delete/${articleId}`,
+        {
+          method: "DELETE",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: localStorage.getItem(`token`),
+          },
+        }
+      );
+      const response = await data.json();
+      if (!data.ok) {
+        throw new Error(response.error);
+      } else {
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const updatePost = async (fetchAction, body) => {
     try {
+      console.log("reach update");
+      console.log(
+        `http://localhost:4000/api/posts/${fetchAction}/update/${updateId}`
+      );
       let data = await fetch(
         `http://localhost:4000/api/posts/${fetchAction}/update/${updateId}`,
         {

@@ -149,6 +149,7 @@ const StyledButtonWrapper = styled.div`
 const DashboardArticlePreview = (props) => {
   const deletePost = async (e, postId, setState) => {
     const fetchAction = e.target.getAttribute("name");
+    console.log(fetchAction);
     const uriSnippet = fetchAction === "draft" ? "/draft/delete" : "/delete";
     try {
       let data = await fetch(
@@ -182,7 +183,11 @@ const DashboardArticlePreview = (props) => {
               <StyledViewButton>View</StyledViewButton>
             </Link>
           )}
-          <Link to={`/createArticle/edit/${props.articleId}`}>
+          <Link
+            to={`/createArticle/edit${props.post ? "" : "/draft"}/${
+              props.articleId
+            }`}
+          >
             <StyledEditButton>Edit</StyledEditButton>
           </Link>
           <StyledDeleteButton

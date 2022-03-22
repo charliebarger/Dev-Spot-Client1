@@ -244,9 +244,10 @@ const Dashboard = () => {
         <StyledMargin>
           {drafts.length > 0 ? (
             drafts.map((draft) => {
-              console.log(draft.imageUrl);
               return (
                 <DashboardArticlePreview
+                  setPosts={setRequestData}
+                  articleId={draft.id}
                   image={draft.imageUrl}
                   title={draft.title}
                   shortDate={draft.shortDate}
