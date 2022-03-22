@@ -30,6 +30,14 @@ const Body = () => {
         <Route path={"/dashboard"} element={<Dashboard />} />
         <Route path={"/article/:id"} element={<Article />} />
         <Route
+          path="/createArticle/edit/:id"
+          element={<ArticleCreator />}
+        ></Route>
+        <Route
+          path="/createArticle/edit/draft/:id"
+          element={<ArticleCreator draft={true} />}
+        ></Route>
+        <Route
           path="/createArticle"
           element={
             <PrivateRoute>

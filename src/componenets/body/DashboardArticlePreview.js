@@ -148,8 +148,6 @@ const StyledButtonWrapper = styled.div`
 
 const DashboardArticlePreview = (props) => {
   const deletePost = async (e, postId, setState) => {
-    console.log(e.target);
-
     const fetchAction = e.target.getAttribute("name");
     const uriSnippet = fetchAction === "draft" ? "/draft/delete" : "/delete";
     try {
@@ -165,7 +163,6 @@ const DashboardArticlePreview = (props) => {
         }
       );
       const response = await data.json();
-      console.log(response);
       if (!data.ok) {
         throw new Error(response.error);
       } else {
@@ -176,7 +173,6 @@ const DashboardArticlePreview = (props) => {
     }
   };
 
-  console.log(props.image);
   return (
     <StyledArticle>
       <StyledShadow>
@@ -186,7 +182,7 @@ const DashboardArticlePreview = (props) => {
               <StyledViewButton>View</StyledViewButton>
             </Link>
           )}
-          <Link to="">
+          <Link to={`/createArticle/edit/${props.articleId}`}>
             <StyledEditButton>Edit</StyledEditButton>
           </Link>
           <StyledDeleteButton

@@ -1,5 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Editor } from "@tinymce/tinymce-react";
+import { useParams } from "react-router-dom";
 import FormHeader from "./Form/FormHeader";
 import FormInput from "./Form/FormInput";
 import FormLabel from "./Form/FormLabel";
@@ -36,17 +37,73 @@ const ErrorWrapper = styled.div`
   margin-top: 1.5rem;
 `;
 
-export default function ArticleCreator() {
+export default function ArticleCreator({ draft }) {
+  console.log(draft);
   const navigate = useNavigate();
   const editorRef = useRef();
   const [title, setTitle] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [initialBody, setInitialBody] = useState("");
+  const [updateId, setUpdateID] = useState("");
   const [error, setError] = useState("");
-  const addPost = async (e) => {
-    const fetchAction = e.nativeEvent.submitter.name;
+  let articleId = useParams().id;
+
+  useEffect(() => {
+    const getPost = async () => {
+      try {
+        console.log("at post");
+        let data = await fetch(`http://localhost:4000/api/posts/${articleId}`, {
+          method: "GET",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        console.log(data);
+        const response = await data.json();
+        if (data.ok) {
+          console.log(response.post.title);
+          setTitle(response.post.title);
+          setImageUrl(response.post.imageUrl);
+          setInitialBody(response.post.body);
+          setUpdateID(response.post.id);
+        } else {
+          // should navigate to error page
+          throw new Error(response.error);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getPost();
+  }, [articleId]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError(false);
+    const fetchAction = e.nativeEvent.submitter.name;
     const htmlToString = editorRef.current.getContent();
+    try {
+      let data;
+      if (articleId) {
+        console.log("here");
+        data = await updatePost(fetchAction, htmlToString);
+      } else {
+        data = await addPost(fetchAction, htmlToString);
+      }
+      const response = await data.json();
+      if (data.ok) {
+        navigate("/dashboard");
+      } else {
+        setError(response.error);
+        throw new Error(response.error);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const addPost = async (fetchAction, body) => {
     try {
       let data = await fetch(`http://localhost:4000/api/posts/${fetchAction}`, {
         method: "POST",
@@ -58,23 +115,42 @@ export default function ArticleCreator() {
         body: JSON.stringify({
           title,
           imageUrl,
-          postBody: htmlToString,
+          postBody: body,
         }),
       });
-      const response = await data.json();
-      console.log(response);
-      if (data.ok) {
-        navigate("/");
-      } else {
-        setError(response.error);
-        throw new Error(response.error);
-      }
+      return data;
     } catch (error) {
       console.log(error);
     }
   };
+
+  const updatePost = async (fetchAction, body) => {
+    try {
+      let data = await fetch(
+        `http://localhost:4000/api/posts/${fetchAction}/update/${updateId}`,
+        {
+          method: "PUT",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: localStorage.getItem(`token`),
+          },
+          body: JSON.stringify({
+            title,
+            imageUrl,
+            postBody: body,
+          }),
+        }
+      );
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <StyledForm onSubmit={addPost}>
+    <StyledForm onSubmit={handleSubmit}>
       <FormHeader>Create Blog Post</FormHeader>
       <FormLabel required labelFor={"title"}>
         Title
@@ -100,6 +176,7 @@ export default function ArticleCreator() {
       </FormLabel>
       <Editor
         id="editor"
+        initialValue={initialBody}
         apiKey={process.env.REACT_APP_TINY_URI}
         onInit={(evt, editor) => (editorRef.current = editor)}
         init={{

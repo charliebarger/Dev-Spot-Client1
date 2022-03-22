@@ -190,7 +190,6 @@ const Dashboard = () => {
         });
         const response = await data.json();
         if (data.ok) {
-          console.log(response);
           setDrafts(response.drafts);
           setUser(response.user);
           setPosts(response.posts);
@@ -214,7 +213,6 @@ const Dashboard = () => {
         <StyledMargin>
           {posts.length > 0 ? (
             posts.map((post) => {
-              console.log(post.imageUrl);
               return (
                 <DashboardArticlePreview
                   post
