@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { Rings } from "react-loader-spinner";
 import Button from "../utils/Button";
 import DashboardArticlePreview from "./DashboardArticlePreview";
+import getMyDrafts from "../../assets/actions/drafts/getDraftsbyUser";
+import getMyPosts from "../../assets/actions/posts/getPostsbyUser";
 const StyledHeader = styled.h1`
   text-transform: capitalize;
   text-align: center;
@@ -178,8 +180,12 @@ const Dashboard = () => {
   const [posts, setPosts] = useState([]);
   const [requestData, setRequestData] = useState(new Date());
   useEffect(() => {
-    const getDrafts = async () => {
+    const getAll = async () => {
       try {
+        const myDrafts = await getMyDrafts();
+        console.log(myDrafts);
+        const myPosts = await getMyPosts();
+        console.log(myPosts);
         let data = await fetch("http://localhost:4000/api/users/dashboard", {
           method: "GET",
           mode: "cors",
@@ -200,7 +206,7 @@ const Dashboard = () => {
         console.log(error);
       }
     };
-    getDrafts();
+    getAll();
   }, [requestData]);
 
   return (

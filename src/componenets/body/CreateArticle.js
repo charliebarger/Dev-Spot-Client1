@@ -96,11 +96,21 @@ export default function ArticleCreator({ draft }) {
     try {
       let data;
       if (articleId) {
-        if (draft && !fetchAction) {
-          deleteDraft();
-          addPost(fetchAction, htmlToString);
+        if ((draft && !fetchAction) || (!draft && fetchAction)) {
+          if (!draft && fetchAction) {
+            const confirm = window.confirm(
+              "Are you sure you want to save this existing article as a draft? It will be unpublished and saved to your drafts."
+            );
+            if (!confirm) {
+              return;
+            }
+          }
+          console.log(fetchAction);
+          await deleteDraft(fetchAction);
+          data = await addPost(fetchAction, htmlToString);
+        } else {
+          data = await updatePost(fetchAction, htmlToString);
         }
-        data = await updatePost(fetchAction, htmlToString);
       } else {
         data = await addPost(fetchAction, htmlToString);
       }
@@ -137,10 +147,18 @@ export default function ArticleCreator({ draft }) {
     }
   };
 
-  const deleteDraft = async () => {
+  const deleteDraft = async (fetchAction) => {
     try {
+      console.log(fetchAction);
+      console.log(
+        `http://localhost:4000/api/posts${
+          fetchAction ? "" : "/draft"
+        }/delete/${articleId}`
+      );
       let data = await fetch(
-        `http://localhost:4000/api/posts/draft/delete/${articleId}`,
+        `http://localhost:4000/api/posts${
+          fetchAction ? "" : "/draft"
+        }/delete/${articleId}`,
         {
           method: "DELETE",
           mode: "cors",
