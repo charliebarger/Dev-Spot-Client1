@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { Rings } from "react-loader-spinner";
+import deletePost from "../../assets/actions/posts/deletePost";
+import deleteDraft from "../../assets/actions/drafts/deleteDraft";
 import Button from "../utils/Button";
 import { Link } from "react-router-dom";
 
@@ -147,30 +148,21 @@ const StyledButtonWrapper = styled.div`
 `;
 
 const DashboardArticlePreview = (props) => {
-  const deletePost = async (e, postId, setState) => {
-    const fetchAction = e.target.getAttribute("name");
-    console.log(fetchAction);
-    const uriSnippet = fetchAction === "draft" ? "/draft/delete" : "/delete";
+  const deleteThisPost = async (postId, setState) => {
     try {
-      let data = await fetch(
-        `http://localhost:4000/api/posts${uriSnippet}/${postId}`,
-        {
-          method: "DELETE",
-          mode: "cors",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: localStorage.getItem(`token`),
-          },
-        }
-      );
-      const response = await data.json();
-      if (!data.ok) {
-        throw new Error(response.error);
-      } else {
-        setState(Date.now());
-      }
+      await deletePost(postId);
+      setState(Date.now());
     } catch (error) {
-      console.log(error);
+      throw new Error(error);
+    }
+  };
+
+  const deleteThisDraft = async (postId, setState) => {
+    try {
+      await deleteDraft(postId);
+      setState(Date.now());
+    } catch (error) {
+      throw new Error(error);
     }
   };
 
@@ -195,11 +187,11 @@ const DashboardArticlePreview = (props) => {
               if (
                 window.confirm("Are you sure you want to delete this article?")
               ) {
-                deletePost(e, props.articleId, props.setPosts);
+                props.post
+                  ? deleteThisPost(props.articleId, props.setPosts)
+                  : deleteThisDraft(props.articleId, props.setPosts);
               }
             }}
-            to=""
-            name={props.post ? "article" : "draft"}
           >
             Delete
           </StyledDeleteButton>
