@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
-import brainImg from "../../assets/images/brain.jpg";
 import CommentSection from "./Comments/CommentWrapper";
 import { useParams } from "react-router-dom";
-import { BallTriangle } from "react-loader-spinner";
 import parse from "html-react-parser";
+import getPostbybyId from "../../assets/actions/posts/getPostbybyId";
 const StyledArticle = styled.article`
   max-width: 650px;
   margin: auto;
@@ -63,36 +62,21 @@ const Article = () => {
   const [article, setArticle] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   let articleId = useParams().id;
+
   useEffect(() => {
-    const getPost = async () => {
+    (async () => {
       try {
-        let data = await fetch(`http://localhost:4000/api/posts/${articleId}`, {
-          method: "GET",
-          mode: "cors",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        const response = await data.json();
-        if (data.ok) {
-          setArticle(response.post);
-          setIsLoaded(true);
-        } else {
-          // should navigate to error page
-          throw new Error(response.error);
-        }
+        const articleInfo = await getPostbybyId(articleId);
+        setArticle(articleInfo.post);
+        setIsLoaded(true);
       } catch (error) {
         console.log(error);
       }
-    };
-    getPost();
+    })();
   }, [articleId]);
-  console.log("render");
+
   if (!isLoaded) {
-    return (
-      // <BallTriangle height="100" width="100" color="grey" ariaLabel="loading" />
-      <div></div>
-    );
+    return <div></div>;
   } else {
     console.log(parse(article.body));
     return (

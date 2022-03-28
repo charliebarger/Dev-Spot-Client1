@@ -8,6 +8,10 @@ import styled from "styled-components";
 import StyledErrorMessage from "../utils/StyledErrorMessage";
 import { useNavigate } from "react-router-dom";
 import Button from "../utils/Button";
+import deleteDraft from "../../assets/actions/drafts/deleteDraft";
+import createPost from "../../assets/actions/posts/createPost";
+import createDraft from "../../assets/actions/drafts/createDraft";
+import deletePost from "../../assets/actions/posts/deletePost";
 const StyledForm = styled.form`
   max-width: 800px;
   margin: auto;
@@ -96,24 +100,33 @@ export default function ArticleCreator({ draft }) {
     try {
       let data;
       if (articleId) {
-        if ((draft && !fetchAction) || (!draft && fetchAction)) {
-          if (!draft && fetchAction) {
-            const confirm = window.confirm(
+        if (!draft && fetchAction === "draft") {
+          if (
+            window.confirm(
               "Are you sure you want to save this existing article as a draft? It will be unpublished and saved to your drafts."
-            );
-            if (!confirm) {
-              return;
-            }
+            )
+          ) {
+            await deletePost(articleId);
+            data = await createDraft(htmlToString, title, imageUrl);
+          } else {
+            return;
           }
-          console.log(fetchAction);
-          await deleteDraft(fetchAction);
-          data = await addPost(fetchAction, htmlToString);
+        } else if (draft && fetchAction !== "draft") {
+          await deleteDraft(articleId);
+          data = await createPost(htmlToString, title, imageUrl);
         } else {
           data = await updatePost(fetchAction, htmlToString);
         }
       } else {
-        data = await addPost(fetchAction, htmlToString);
+        if (fetchAction === "draft") {
+          console.log("save this draft");
+          data = await createDraft(htmlToString, title, imageUrl);
+        } else {
+          console.log("herezy");
+          data = await createPost(htmlToString, title, imageUrl);
+        }
       }
+
       const response = await data.json();
       if (data.ok) {
         navigate("/dashboard");
@@ -142,37 +155,6 @@ export default function ArticleCreator({ draft }) {
         }),
       });
       return data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const deleteDraft = async (fetchAction) => {
-    try {
-      console.log(fetchAction);
-      console.log(
-        `http://localhost:4000/api/posts${
-          fetchAction ? "" : "/draft"
-        }/delete/${articleId}`
-      );
-      let data = await fetch(
-        `http://localhost:4000/api/posts${
-          fetchAction ? "" : "/draft"
-        }/delete/${articleId}`,
-        {
-          method: "DELETE",
-          mode: "cors",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: localStorage.getItem(`token`),
-          },
-        }
-      );
-      const response = await data.json();
-      if (!data.ok) {
-        throw new Error(response.error);
-      } else {
-      }
     } catch (error) {
       console.log(error);
     }
