@@ -12,6 +12,8 @@ import deleteDraft from "../../assets/actions/drafts/deleteDraft";
 import createPost from "../../assets/actions/posts/createPost";
 import createDraft from "../../assets/actions/drafts/createDraft";
 import deletePost from "../../assets/actions/posts/deletePost";
+import updatePost from "../../assets/actions/posts/updatePost";
+import updateDraft from "../../assets/actions/drafts/updateDraft";
 const StyledForm = styled.form`
   max-width: 800px;
   margin: auto;
@@ -54,12 +56,6 @@ export default function ArticleCreator({ draft }) {
   useEffect(() => {
     const getPost = async () => {
       try {
-        console.log(draft);
-        console.log(
-          `http://localhost:4000/api/posts/${
-            draft ? "draft/" : "/"
-          }${articleId}`
-        );
         let data = await fetch(
           `http://localhost:4000/api/posts/${
             draft ? "draft/" : "/"
@@ -72,11 +68,8 @@ export default function ArticleCreator({ draft }) {
             },
           }
         );
-        console.log(data);
         const response = await data.json();
-        console.log(response);
         if (data.ok) {
-          console.log(response.post.title);
           setTitle(response.post.title);
           setImageUrl(response.post.imageUrl);
           setInitialBody(response.post.body);
@@ -90,7 +83,7 @@ export default function ArticleCreator({ draft }) {
       }
     };
     getPost();
-  }, [articleId]);
+  }, [articleId, draft]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -115,7 +108,11 @@ export default function ArticleCreator({ draft }) {
           await deleteDraft(articleId);
           data = await createPost(htmlToString, title, imageUrl);
         } else {
-          data = await updatePost(fetchAction, htmlToString);
+          if (fetchAction === "draft") {
+            data = await updateDraft(title, htmlToString, imageUrl, updateId);
+          } else {
+            data = await updatePost(title, htmlToString, imageUrl, updateId);
+          }
         }
       } else {
         if (fetchAction === "draft") {
@@ -126,7 +123,6 @@ export default function ArticleCreator({ draft }) {
           data = await createPost(htmlToString, title, imageUrl);
         }
       }
-
       const response = await data.json();
       if (data.ok) {
         navigate("/dashboard");
@@ -134,56 +130,6 @@ export default function ArticleCreator({ draft }) {
         setError(response.error);
         throw new Error(response.error);
       }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const addPost = async (fetchAction, body) => {
-    try {
-      let data = await fetch(`http://localhost:4000/api/posts/${fetchAction}`, {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: localStorage.getItem(`token`),
-        },
-        body: JSON.stringify({
-          title,
-          imageUrl,
-          postBody: body,
-        }),
-      });
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const updatePost = async (fetchAction, body) => {
-    try {
-      console.log("reach update");
-      console.log(
-        `http://localhost:4000/api/posts/${fetchAction}/update/${updateId}`
-      );
-      let data = await fetch(
-        `http://localhost:4000/api/posts/${fetchAction}/update/${updateId}`,
-        {
-          method: "PUT",
-          mode: "cors",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: localStorage.getItem(`token`),
-          },
-          body: JSON.stringify({
-            title,
-            imageUrl,
-            postBody: body,
-          }),
-        }
-      );
-      console.log(data);
-      return data;
     } catch (error) {
       console.log(error);
     }
