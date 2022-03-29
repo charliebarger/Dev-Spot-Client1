@@ -16,8 +16,7 @@ import createDraft from "../../assets/actions/drafts/createDraft";
 import deletePost from "../../assets/actions/posts/deletePost";
 import updatePost from "../../assets/actions/posts/updatePost";
 import updateDraft from "../../assets/actions/drafts/updateDraft";
-import getSingleDraft from "../../assets/actions/drafts/getSingleDraft";
-import getSinglePosts from "../../assets/actions/posts/getSinglePost";
+
 const StyledForm = styled.form`
   max-width: 800px;
   margin: auto;
