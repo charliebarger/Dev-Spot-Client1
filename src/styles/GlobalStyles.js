@@ -30,6 +30,12 @@ body{
 button{
     cursor:pointer;
 }
+
+pre{
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
 `;
 
 export default GlobalStyles;

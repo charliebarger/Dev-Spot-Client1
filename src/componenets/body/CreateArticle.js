@@ -8,12 +8,16 @@ import styled from "styled-components";
 import StyledErrorMessage from "../utils/StyledErrorMessage";
 import { useNavigate } from "react-router-dom";
 import Button from "../utils/Button";
+import editDraft from "../../assets/actions/drafts/editDraft";
+import editPost from "../../assets/actions/posts/editPost";
 import deleteDraft from "../../assets/actions/drafts/deleteDraft";
 import createPost from "../../assets/actions/posts/createPost";
 import createDraft from "../../assets/actions/drafts/createDraft";
 import deletePost from "../../assets/actions/posts/deletePost";
 import updatePost from "../../assets/actions/posts/updatePost";
 import updateDraft from "../../assets/actions/drafts/updateDraft";
+import getSingleDraft from "../../assets/actions/drafts/getSingleDraft";
+import getSinglePosts from "../../assets/actions/posts/getSinglePost";
 const StyledForm = styled.form`
   max-width: 800px;
   margin: auto;
@@ -54,35 +58,31 @@ export default function ArticleCreator({ draft }) {
   let articleId = useParams().id;
 
   useEffect(() => {
-    const getPost = async () => {
-      try {
-        let data = await fetch(
-          `http://localhost:4000/api/posts/${
-            draft ? "draft/" : "/"
-          }${articleId}`,
-          {
-            method: "GET",
-            mode: "cors",
-            headers: {
-              "Content-Type": "application/json",
-            },
+    //if there is an ID in the URL then get the post or draft and set state with it
+    if (articleId) {
+      const getPost = async () => {
+        try {
+          let data = draft
+            ? await editDraft(articleId)
+            : await editPost(articleId);
+          const response = await data.json();
+          if (data.ok) {
+            setTitle(response.post.title);
+            setImageUrl(response.post.imageUrl);
+            setInitialBody(response.post.body);
+            setUpdateID(response.post.id);
+          } else {
+            // should navigate to error page
+            navigate("/");
+            throw new Error(response.error);
           }
-        );
-        const response = await data.json();
-        if (data.ok) {
-          setTitle(response.post.title);
-          setImageUrl(response.post.imageUrl);
-          setInitialBody(response.post.body);
-          setUpdateID(response.post.id);
-        } else {
-          // should navigate to error page
-          throw new Error(response.error);
+        } catch (error) {
+          navigate("/");
+          console.log(error);
         }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getPost();
+      };
+      getPost();
+    }
   }, [articleId, draft]);
 
   const handleSubmit = async (e) => {
@@ -92,7 +92,9 @@ export default function ArticleCreator({ draft }) {
     const htmlToString = editorRef.current.getContent();
     try {
       let data;
+      //article ID being true signifies an update
       if (articleId) {
+        //Article started as published and is moved to unpublished if confirmed
         if (!draft && fetchAction === "draft") {
           if (
             window.confirm(
@@ -104,16 +106,20 @@ export default function ArticleCreator({ draft }) {
           } else {
             return;
           }
+          //Article starts as a draft and is being published
         } else if (draft && fetchAction !== "draft") {
           await deleteDraft(articleId);
           data = await createPost(htmlToString, title, imageUrl);
         } else {
+          //Starts as draft and saved as draft
           if (fetchAction === "draft") {
             data = await updateDraft(title, htmlToString, imageUrl, updateId);
           } else {
+            //Starts as published and saved as published
             data = await updatePost(title, htmlToString, imageUrl, updateId);
           }
         }
+        //Creating new draft or published article
       } else {
         if (fetchAction === "draft") {
           console.log("save this draft");

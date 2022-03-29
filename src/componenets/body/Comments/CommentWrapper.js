@@ -18,7 +18,7 @@ const StyledCommentSection = styled.section`
 
 const CommentSection = ({ articleId }) => {
   const [comments, setComments] = useState([]);
-
+  const [reset, setReset] = useState(Date.now());
   const getComments = useCallback(async () => {
     try {
       let data = await fetch(
@@ -46,7 +46,7 @@ const CommentSection = ({ articleId }) => {
 
   useEffect(() => {
     getComments();
-  }, [getComments]);
+  }, [getComments, reset]);
 
   return (
     <StyledCommentSection>
@@ -57,8 +57,11 @@ const CommentSection = ({ articleId }) => {
           <Comment
             body={commentData.comment}
             name={commentData.user.firstName + " " + commentData.user.lastName}
+            commentAuthor={commentData.user._id}
+            commentId={commentData._id}
             date={commentData.date}
             key={commentData._id}
+            reset={setReset}
           />
         );
       })}

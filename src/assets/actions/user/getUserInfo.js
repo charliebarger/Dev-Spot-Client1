@@ -13,7 +13,7 @@ const getUserInfo = async () => {
     if (data.ok) {
       return response.user;
     } else {
-      return response.error;
+      throw new Error(response.error);
     }
   } catch (error) {
     console.log(error);
