@@ -75,7 +75,7 @@ const Article = () => {
         console.log(error);
       }
     })();
-  }, [articleId]);
+  }, [articleId, navigate]);
 
   if (!isLoaded) {
     return <div></div>;
