@@ -199,7 +199,9 @@ const DashboardArticlePreview = (props) => {
       </StyledShadow>
       <StyledTopDivWrapper>
         <StyledArticleHeader>{props.title}</StyledArticleHeader>
-        <StyledImgWrapper image={props.image}></StyledImgWrapper>
+        {((props.post && props.image) || !props.post) && (
+          <StyledImgWrapper image={props.image}></StyledImgWrapper>
+        )}
       </StyledTopDivWrapper>
       <StyledFooter>
         <StyledSpan>Last Edited: {props.shortDate}</StyledSpan>

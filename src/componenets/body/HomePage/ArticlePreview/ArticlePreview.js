@@ -111,16 +111,18 @@ const ArticlePreview = (props) => {
         </StyledArticleInfo>
         <StyledImageWrapperSection>
           <StyledImageWrapper>
-            <StyledImage
-              src={props.imageUrl}
-              alt={"Article Thumbnail"}
-              onError={({ currentTarget }) => {
-                currentTarget.onerror = null;
-                currentTarget.src =
-                  "https://static.vecteezy.com/system/resources/previews/002/811/419/original/404-error-programming-vector.jpg";
-                currentTarget.alt = "image not found";
-              }}
-            ></StyledImage>
+            {props.imageUrl && (
+              <StyledImage
+                src={props.imageUrl}
+                alt={"Article Thumbnail"}
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null;
+                  currentTarget.src =
+                    "https://static.vecteezy.com/system/resources/previews/002/811/419/original/404-error-programming-vector.jpg";
+                  currentTarget.alt = "image not found";
+                }}
+              />
+            )}
           </StyledImageWrapper>
         </StyledImageWrapperSection>
       </StyledArticle>
