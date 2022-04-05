@@ -9,7 +9,6 @@ const getMyDrafts = async () => {
       },
     });
     const response = await data.json();
-    console.log(data);
     if (data.ok) {
       return response.drafts;
     } else {

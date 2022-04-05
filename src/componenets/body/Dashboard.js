@@ -62,7 +62,6 @@ const StyledWrapper = styled.div`
 
 const Dashboard = () => {
   const [drafts, setDrafts] = useState([]);
-  console.log(drafts);
   const [user, setUser] = useState("");
   const [posts, setPosts] = useState([]);
   const [requestData, setRequestData] = useState(new Date());

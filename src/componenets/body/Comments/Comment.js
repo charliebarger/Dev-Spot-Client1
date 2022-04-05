@@ -48,8 +48,6 @@ const Comment = ({ body, name, date, commentAuthor, commentId, reset }) => {
       userData ? setUser(userData) : setUser(false);
     })();
   }, [setUser]);
-
-  console.log(user._id, commentAuthor);
   return (
     <CommentWrapper>
       <StyledTopWrapper>

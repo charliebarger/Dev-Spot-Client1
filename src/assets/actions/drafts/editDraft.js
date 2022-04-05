@@ -11,10 +11,8 @@ const editDraft = async (articleId) => {
         },
       }
     );
-    console.log(data);
     return data;
   } catch (error) {
-    console.log(error);
     return false;
   }
 };

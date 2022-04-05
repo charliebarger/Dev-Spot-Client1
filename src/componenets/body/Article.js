@@ -78,7 +78,6 @@ const Article = () => {
   if (!isLoaded) {
     return <div></div>;
   } else {
-    console.log(parse(article.body));
     return (
       <StyledArticle>
         <StyledPaddingWrapper>

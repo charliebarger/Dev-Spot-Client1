@@ -1,6 +1,5 @@
 const deleteDraft = async (postId) => {
   try {
-    console.log("at delete post");
     let data = await fetch(
       `http://localhost:4000/api/posts/draft/delete/${postId}`,
       {

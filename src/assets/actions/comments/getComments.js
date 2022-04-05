@@ -1,6 +1,5 @@
 const getComments = async (articleId) => {
   try {
-    console.log(articleId);
     let data = await fetch(
       `http://localhost:4000/api/posts/${articleId}/comments`,
       {

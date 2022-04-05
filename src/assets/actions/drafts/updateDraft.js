@@ -1,5 +1,4 @@
 const updateDraft = async (title, body, imageUrl, updateId) => {
-  console.log("updating....");
   try {
     let data = await fetch(
       `http://localhost:4000/api/drafts/update/${updateId}`,

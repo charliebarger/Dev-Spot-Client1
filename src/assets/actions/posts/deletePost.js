@@ -1,6 +1,5 @@
 const deletePost = async (postId) => {
   try {
-    console.log("at delete post");
     let data = await fetch(`http://localhost:4000/api/posts/delete/${postId}`, {
       method: "DELETE",
       mode: "cors",
@@ -10,7 +9,6 @@ const deletePost = async (postId) => {
       },
     });
     const response = await data.json();
-    console.log(response);
     if (data.ok) {
       return response;
     } else {

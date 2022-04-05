@@ -40,7 +40,6 @@ const SignUpForm = () => {
       }),
     });
     answer = await answer.json();
-    console.log(answer);
     if (answer.error) {
       setError(answer.error);
     } else {

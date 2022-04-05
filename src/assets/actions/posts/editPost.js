@@ -11,7 +11,6 @@ const editPost = async (articleId) => {
         },
       }
     );
-    console.log(data);
     return data;
   } catch (error) {
     return false;

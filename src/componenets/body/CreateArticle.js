@@ -121,10 +121,8 @@ export default function ArticleCreator({ draft }) {
         //Creating new draft or published article
       } else {
         if (fetchAction === "draft") {
-          console.log("save this draft");
           data = await createDraft(htmlToString, title, imageUrl);
         } else {
-          console.log("herezy");
           data = await createPost(htmlToString, title, imageUrl);
         }
       }

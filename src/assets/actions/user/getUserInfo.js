@@ -1,6 +1,5 @@
 const getUserInfo = async () => {
   try {
-    console.log("at my posts");
     let data = await fetch("http://localhost:4000/api/users", {
       method: "GET",
       mode: "cors",

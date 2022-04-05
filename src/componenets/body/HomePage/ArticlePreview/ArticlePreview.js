@@ -98,7 +98,6 @@ const StyledArticleBody = styled.p`
 `;
 
 const ArticlePreview = (props) => {
-  console.log(props.index);
   return (
     <StyledArticleLink className="exactly" to={`/article/${props.id}`}>
       <StyledArticle index={props.index}>

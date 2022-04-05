@@ -1,7 +1,6 @@
 const createDraft = async (body, title, imageUrl) => {
   try {
     const postBody = body ? body : "";
-    console.log(postBody);
     let data = await fetch(`http://localhost:4000/api/drafts`, {
       method: "POST",
       mode: "cors",
