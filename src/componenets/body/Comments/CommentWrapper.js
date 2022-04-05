@@ -36,7 +36,7 @@ const CommentSection = ({ articleId }) => {
 
   useEffect(() => {
     renderComments();
-  }, [renderComments]);
+  }, [renderComments, reset]);
 
   return (
     <StyledCommentSection>

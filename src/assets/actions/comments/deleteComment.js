@@ -12,6 +12,7 @@ const deleteComment = async (commentId, reset) => {
       }
     );
     const response = await data.json();
+    console.log(response);
     if (data.error) {
       throw new Error(response.error);
     } else {
