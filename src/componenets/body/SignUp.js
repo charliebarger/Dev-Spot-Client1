@@ -108,7 +108,7 @@ const SignUpForm = () => {
         minlength={"5"}
       ></FormInput>
       <RequiredFields />
-      <InternalLink>Already have an Acount? Sign In</InternalLink>
+      <InternalLink url="/signIn">Already have an Acount? Sign In</InternalLink>
       {error && <StyledErrorMessage>{error}</StyledErrorMessage>}
       <SubmitButton></SubmitButton>
     </Form>
