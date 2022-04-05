@@ -71,12 +71,10 @@ export default function ArticleCreator({ draft }) {
             setInitialBody(response.post.body);
             setUpdateID(response.post.id);
           } else {
-            // should navigate to error page
-            navigate("/");
             throw new Error(response.error);
           }
         } catch (error) {
-          navigate("/");
+          navigate("/404");
           console.log(error);
         }
       };

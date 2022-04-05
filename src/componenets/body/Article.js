@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import CommentSection from "./Comments/CommentWrapper";
 import { useParams } from "react-router-dom";
 import parse from "html-react-parser";
+import { useNavigate } from "react-router-dom";
 import getPostbybyId from "../../assets/actions/posts/getPostbybyId";
 const StyledArticle = styled.article`
   max-width: 650px;
@@ -62,7 +63,7 @@ const Article = () => {
   const [article, setArticle] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   let articleId = useParams().id;
-
+  const navigate = useNavigate();
   useEffect(() => {
     (async () => {
       try {
@@ -70,6 +71,7 @@ const Article = () => {
         setArticle(articleInfo.post);
         setIsLoaded(true);
       } catch (error) {
+        navigate("/404error");
         console.log(error);
       }
     })();

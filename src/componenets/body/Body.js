@@ -8,6 +8,7 @@ import HomePage from "./HomePage/HomePage";
 import ArticleCreator from "./CreateArticle";
 import Article from "./Article";
 import SignUpForm from "./SignUp";
+import NotFound from "./404";
 import { Routes, Route } from "react-router-dom";
 import PrivateRoute from "../utils/ProtectedRoute";
 const StyledBody = styled.main`
@@ -45,6 +46,7 @@ const Body = () => {
             </PrivateRoute>
           }
         ></Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </StyledBody>
   );
