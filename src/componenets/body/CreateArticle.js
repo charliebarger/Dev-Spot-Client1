@@ -82,7 +82,7 @@ export default function ArticleCreator({ draft }) {
       };
       getPost();
     }
-  }, [articleId, draft]);
+  }, [articleId, draft, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

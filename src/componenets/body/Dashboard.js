@@ -98,6 +98,7 @@ const Dashboard = () => {
                   image={post.imageUrl}
                   title={post.title}
                   shortDate={post.shortDate}
+                  key={post.id}
                 />
               );
             })
@@ -128,6 +129,7 @@ const Dashboard = () => {
                   image={draft.imageUrl}
                   title={draft.title}
                   shortDate={draft.shortDate}
+                  key={draft.id}
                 />
               );
             })

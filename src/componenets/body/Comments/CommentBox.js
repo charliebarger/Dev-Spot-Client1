@@ -2,7 +2,6 @@ import styled from "styled-components";
 import React, { useState } from "react";
 import Button from "../../utils/Button";
 import createComment from "../../../assets/actions/comments/createComment";
-import { useParams } from "react-router-dom";
 const StyledTextArea = styled.textarea`
   width: 100%;
   padding: 0.75rem;
