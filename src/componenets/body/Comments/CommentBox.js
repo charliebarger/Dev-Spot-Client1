@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import React, { useState } from "react";
 import Button from "../../utils/Button";
+import createComment from "../../../assets/actions/comments/createComment";
 import { useParams } from "react-router-dom";
 const StyledTextArea = styled.textarea`
   width: 100%;
@@ -26,27 +27,9 @@ const CommentBox = ({ articleId, getComments }) => {
   const submitComment = async (e) => {
     e.preventDefault();
     setComment("");
-    try {
-      let data = await fetch(
-        `http://localhost:4000/api/posts/${articleId}/comments`,
-        {
-          method: "POST",
-          mode: "cors",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: localStorage.getItem(`token`),
-          },
-          body: JSON.stringify({ comment }),
-        }
-      );
-      const response = await data.json();
-      if (data.ok) {
-        getComments();
-      } else {
-        Error(response.error);
-      }
-    } catch (error) {
-      console.log(error);
+    const data = await createComment(comment, articleId);
+    if (data.ok) {
+      getComments();
     }
   };
 

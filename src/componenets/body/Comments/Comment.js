@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
+import deleteComment from "../../../assets/actions/comments/deleteComment";
 import getUserInfo from "../../../assets/actions/user/getUserInfo";
 const StyledTopWrapper = styled.div`
   display: flex;
@@ -48,30 +49,6 @@ const Comment = ({ body, name, date, commentAuthor, commentId, reset }) => {
     })();
   }, [setUser]);
 
-  const deleteComment = async () => {
-    try {
-      console.log(commentId);
-      let data = await fetch(
-        `http://localhost:4000/api/posts/comments/${commentId}/delete`,
-        {
-          method: "DELETE",
-          mode: "cors",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: localStorage.getItem(`token`),
-          },
-        }
-      );
-      const response = await data.json();
-      if (data.error) {
-        throw new Error(response.error);
-      } else {
-        reset(Date.now());
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
   console.log(user._id, commentAuthor);
   return (
     <CommentWrapper>
@@ -80,7 +57,7 @@ const Comment = ({ body, name, date, commentAuthor, commentId, reset }) => {
         <span>|</span>
         <StyledDate>{date}</StyledDate>
         {user._id === commentAuthor && (
-          <StyledTrashCan onClick={deleteComment}>
+          <StyledTrashCan onClick={() => deleteComment(commentId, reset)}>
             <img
               alt="trash can"
               src="https://img.icons8.com/material-outlined/24/000000/trash--v1.png"
