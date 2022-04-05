@@ -2,6 +2,7 @@ import styled from "styled-components";
 import React, { useEffect, useState, useCallback } from "react";
 import CommentBox from "./CommentBox";
 import Comment from "./Comment";
+import getComments from "../../../assets/actions/comments/getComments";
 const StyledCommentHeader = styled.h4`
   border-bottom: 1px solid ${({ theme }) => theme.colors.fontColor2};
   padding: 1rem 0;
@@ -19,21 +20,10 @@ const StyledCommentSection = styled.section`
 const CommentSection = ({ articleId }) => {
   const [comments, setComments] = useState([]);
   const [reset, setReset] = useState(Date.now());
-  const getComments = useCallback(async () => {
+  const renderComments = useCallback(async () => {
     try {
-      let data = await fetch(
-        `http://localhost:4000/api/posts/${articleId}/comments`,
-        {
-          method: "GET",
-          mode: "cors",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        },
-        []
-      );
+      let data = await getComments(articleId);
       const response = await data.json();
-      console.log(response);
       if (data.ok) {
         setComments(response);
       } else {
@@ -45,13 +35,13 @@ const CommentSection = ({ articleId }) => {
   }, [articleId]);
 
   useEffect(() => {
-    getComments();
-  }, [getComments, reset]);
+    renderComments();
+  }, [renderComments]);
 
   return (
     <StyledCommentSection>
       <StyledCommentHeader>Comments ({comments.length})</StyledCommentHeader>
-      <CommentBox articleId={articleId} getComments={getComments} />
+      <CommentBox articleId={articleId} getComments={renderComments} />
       {comments.map((commentData) => {
         return (
           <Comment
