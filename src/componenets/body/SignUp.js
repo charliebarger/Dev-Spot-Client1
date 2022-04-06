@@ -20,7 +20,7 @@ const SignUpForm = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (loggedIn) {
-      navigate("/");
+      navigate("/Dev-Spot-Client1/");
     }
   }, [loggedIn, navigate]);
   const registerUser = async (e) => {
@@ -46,7 +46,7 @@ const SignUpForm = () => {
     if (answer.error) {
       setError(answer.error);
     } else {
-      navigate("/signIn");
+      navigate("/Dev-Spot-Client1/signIn");
     }
   };
 
@@ -111,7 +111,9 @@ const SignUpForm = () => {
         minlength={"5"}
       ></FormInput>
       <RequiredFields />
-      <InternalLink url="/signIn">Already have an Acount? Sign In</InternalLink>
+      <InternalLink url="/Dev-Spot-Client1/signIn">
+        Already have an Acount? Sign In
+      </InternalLink>
       {error && <StyledErrorMessage>{error}</StyledErrorMessage>}
       <SubmitButton></SubmitButton>
     </Form>

@@ -176,9 +176,9 @@ const DashboardArticlePreview = (props) => {
             </Link>
           )}
           <Link
-            to={`/createArticle/edit${props.post ? "" : "/draft"}/${
-              props.articleId
-            }`}
+            to={`/Dev-Spot-Client1/createArticle/edit${
+              props.post ? "" : "/draft"
+            }/${props.articleId}`}
           >
             <StyledEditButton>Edit</StyledEditButton>
           </Link>

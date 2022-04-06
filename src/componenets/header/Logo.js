@@ -24,7 +24,7 @@ const StyledCompanyName = styled.span`
 
 const Logo = () => {
   return (
-    <Link to={"/"}>
+    <Link to={"/Dev-Spot-Client1/"}>
       <StyledLogoWrapper>
         <StyledLogo alt="logo" src={logo}></StyledLogo>
         <StyledCompanyName>Dev Spot</StyledCompanyName>

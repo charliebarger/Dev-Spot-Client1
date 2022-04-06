@@ -20,7 +20,7 @@ const LogOutButton = () => {
   const logOut = () => {
     localStorage.clear();
     setLoggedIn(false);
-    navigate("/");
+    navigate("/Dev-Spot-Client1/");
   };
 
   return <StyledLogOutButton onClick={logOut}>Log Out</StyledLogOutButton>;

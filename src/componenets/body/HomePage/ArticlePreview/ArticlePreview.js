@@ -99,7 +99,10 @@ const StyledArticleBody = styled.p`
 
 const ArticlePreview = (props) => {
   return (
-    <StyledArticleLink className="exactly" to={`/article/${props.id}`}>
+    <StyledArticleLink
+      className="exactly"
+      to={`/Dev-Spot-Client1/article/${props.id}`}
+    >
       <StyledArticle index={props.index}>
         <StyledArticleInfo>
           <StyledTopWrapper>

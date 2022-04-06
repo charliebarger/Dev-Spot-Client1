@@ -9,7 +9,7 @@ import ArticleCreator from "./CreateArticle";
 import Article from "./Article";
 import SignUpForm from "./SignUp";
 import NotFound from "./404";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, HashRouter } from "react-router-dom";
 import PrivateRoute from "../utils/ProtectedRoute";
 const StyledBody = styled.main`
   background: #ededed;
@@ -25,21 +25,21 @@ const Body = () => {
     <StyledBody>
       <MuteBody />
       <Routes>
-        <Route path={"/"} element={<HomePage />} />
-        <Route path={"/signUp"} element={<SignUpForm />} />
-        <Route path={"/signIn"} element={<SignInForm />} />
-        <Route path={"/dashboard"} element={<Dashboard />} />
-        <Route path={"/article/:id"} element={<Article />} />
+        <Route path={"/Dev-Spot-Client1/"} element={<HomePage />} />
+        <Route path={"/Dev-Spot-Client1/signUp"} element={<SignUpForm />} />
+        <Route path={"/Dev-Spot-Client1/signIn"} element={<SignInForm />} />
+        <Route path={"/Dev-Spot-Client1/dashboard"} element={<Dashboard />} />
+        <Route path={"/Dev-Spot-Client1/article/:id"} element={<Article />} />
         <Route
-          path="/createArticle/edit/:id"
+          path="/Dev-Spot-Client1/createArticle/edit/:id"
           element={<ArticleCreator />}
         ></Route>
         <Route
-          path="/createArticle/edit/draft/:id"
+          path="/Dev-Spot-Client1/createArticle/edit/draft/:id"
           element={<ArticleCreator draft={true} />}
         ></Route>
         <Route
-          path="/createArticle"
+          path="/Dev-Spot-Client1/createArticle"
           element={
             <PrivateRoute>
               <ArticleCreator />

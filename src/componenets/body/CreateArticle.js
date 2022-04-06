@@ -74,7 +74,7 @@ export default function ArticleCreator({ draft }) {
             throw new Error(response.error);
           }
         } catch (error) {
-          navigate("/404");
+          navigate("/Dev-Spot-Client1/404");
           console.log(error);
         }
       };
@@ -126,7 +126,7 @@ export default function ArticleCreator({ draft }) {
       }
       const response = await data.json();
       if (data.ok) {
-        navigate("/dashboard");
+        navigate("/Dev-Spot-Client1/dashboard");
       } else {
         setError(response.error);
         throw new Error(response.error);
