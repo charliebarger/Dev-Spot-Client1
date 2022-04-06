@@ -1,7 +1,7 @@
 const getComments = async (articleId) => {
   try {
     let data = await fetch(
-      `http://localhost:4000/api/posts/${articleId}/comments`,
+      `https://gentle-wildwood-95976.herokuapp.com/api/posts/${articleId}/comments`,
       {
         method: "GET",
         mode: "cors",

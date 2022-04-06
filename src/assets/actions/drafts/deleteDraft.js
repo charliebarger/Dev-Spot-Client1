@@ -1,7 +1,7 @@
 const deleteDraft = async (postId) => {
   try {
     let data = await fetch(
-      `http://localhost:4000/api/drafts/delete/${postId}`,
+      `https://gentle-wildwood-95976.herokuapp.com/api/drafts/delete/${postId}`,
       {
         method: "DELETE",
         mode: "cors",

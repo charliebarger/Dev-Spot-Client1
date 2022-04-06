@@ -1,7 +1,7 @@
 const editDraft = async (articleId) => {
   try {
     let data = await fetch(
-      `http://localhost:4000/api/drafts/edit/${articleId}`,
+      `https://gentle-wildwood-95976.herokuapp.com/api/drafts/edit/${articleId}`,
       {
         method: "GET",
         mode: "cors",

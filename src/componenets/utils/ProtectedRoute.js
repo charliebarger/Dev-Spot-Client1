@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 const verifyToken = async () => {
   try {
     const authenticate = await fetch(
-      "http://localhost:4000/api/users/protected",
+      "https://gentle-wildwood-95976.herokuapp.com/api/users/protected",
       {
         method: "GET",
         mode: "cors",

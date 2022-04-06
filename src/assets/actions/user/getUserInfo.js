@@ -1,13 +1,16 @@
 const getUserInfo = async () => {
   try {
-    let data = await fetch("http://localhost:4000/api/users", {
-      method: "GET",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: localStorage.getItem(`token`),
-      },
-    });
+    let data = await fetch(
+      "https://gentle-wildwood-95976.herokuapp.com/api/users",
+      {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem(`token`),
+        },
+      }
+    );
     const response = await data.json();
     if (data.ok) {
       return response.user;

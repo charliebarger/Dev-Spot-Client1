@@ -1,7 +1,7 @@
 const deleteComment = async (commentId, reset) => {
   try {
     let data = await fetch(
-      `http://localhost:4000/api/posts/comments/${commentId}/delete`,
+      `https://gentle-wildwood-95976.herokuapp.com/api/posts/comments/${commentId}/delete`,
       {
         method: "DELETE",
         mode: "cors",

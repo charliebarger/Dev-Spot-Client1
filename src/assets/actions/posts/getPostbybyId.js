@@ -1,12 +1,15 @@
 const getPostbybyId = async (articleId) => {
   try {
-    let data = await fetch(`http://localhost:4000/api/posts/${articleId}`, {
-      method: "GET",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    let data = await fetch(
+      `https://gentle-wildwood-95976.herokuapp.com/api/posts/${articleId}`,
+      {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     const response = await data.json();
     if (data.ok) {
       return response;

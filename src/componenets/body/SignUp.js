@@ -25,20 +25,23 @@ const SignUpForm = () => {
   }, [loggedIn, navigate]);
   const registerUser = async (e) => {
     e.preventDefault();
-    let answer = await fetch("http://localhost:4000/api/users/signup", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        firstName,
-        lastName,
-        email,
-        password,
-        confirmPassword,
-      }),
-    });
+    let answer = await fetch(
+      "https://gentle-wildwood-95976.herokuapp.com/api/users/signup",
+      {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          password,
+          confirmPassword,
+        }),
+      }
+    );
     answer = await answer.json();
     if (answer.error) {
       setError(answer.error);

@@ -1,13 +1,16 @@
 const deletePost = async (postId) => {
   try {
-    let data = await fetch(`http://localhost:4000/api/posts/delete/${postId}`, {
-      method: "DELETE",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: localStorage.getItem(`token`),
-      },
-    });
+    let data = await fetch(
+      `https://gentle-wildwood-95976.herokuapp.com/api/posts/delete/${postId}`,
+      {
+        method: "DELETE",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem(`token`),
+        },
+      }
+    );
     const response = await data.json();
     if (data.ok) {
       return response;

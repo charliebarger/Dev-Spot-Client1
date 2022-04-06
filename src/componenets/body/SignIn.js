@@ -24,14 +24,17 @@ const SignInForm = () => {
   const registerUser = async (e) => {
     e.preventDefault();
     try {
-      let data = await fetch("http://localhost:4000/api/users/login", {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      let data = await fetch(
+        "https://gentle-wildwood-95976.herokuapp.com/api/users/login",
+        {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
       const response = await data.json();
       if (data.ok) {
         navigate("/");

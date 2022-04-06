@@ -15,7 +15,7 @@ const App = () => {
     const authenticate = async (token) => {
       try {
         const authenticate = await fetch(
-          "http://localhost:4000/api/users/protected",
+          "https://gentle-wildwood-95976.herokuapp.com/api/users/protected",
           {
             method: "GET",
             mode: "cors",

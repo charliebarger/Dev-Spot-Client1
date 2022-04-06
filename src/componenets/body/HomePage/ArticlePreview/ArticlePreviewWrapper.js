@@ -35,13 +35,16 @@ const ArticlePreviewWrapper = () => {
 
     const getPosts = async (e) => {
       try {
-        let data = await fetch("http://localhost:4000/api/posts", {
-          method: "GET",
-          mode: "cors",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        let data = await fetch(
+          "https://gentle-wildwood-95976.herokuapp.com/api/posts",
+          {
+            method: "GET",
+            mode: "cors",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
         const response = await data.json();
         if (data.ok) {
           createBodyPreview(response);
