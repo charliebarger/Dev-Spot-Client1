@@ -25,7 +25,7 @@ const Body = () => {
     <StyledBody>
       <MuteBody />
       <Routes>
-        <Route path={"/#/"} element={<HomePage />} />
+        <Route path={"/Dev-Spot-Client1"} element={<HomePage />} />
         <Route path={"/Dev-Spot-Client1/signUp"} element={<SignUpForm />} />
         <Route path={"/Dev-Spot-Client1/signIn"} element={<SignInForm />} />
         <Route path={"/Dev-Spot-Client1/dashboard"} element={<Dashboard />} />

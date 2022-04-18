@@ -1,4 +1,14 @@
 import React, { useRef, useState, useEffect } from "react";
+import "tinymce/tinymce";
+import "tinymce/icons/default";
+import "tinymce/themes/silver";
+import "tinymce/plugins/paste";
+import "tinymce/plugins/link";
+import "tinymce/plugins/image";
+import "tinymce/plugins/table";
+import "tinymce/skins/ui/oxide/skin.min.css";
+import "tinymce/skins/ui/oxide/content.min.css";
+import "tinymce/skins/content/default/content.min.css";
 import { Editor } from "@tinymce/tinymce-react";
 import { useParams } from "react-router-dom";
 import FormHeader from "./Form/FormHeader";
@@ -164,7 +174,6 @@ export default function ArticleCreator({ draft }) {
       <Editor
         id="editor"
         initialValue={initialBody}
-        apiKey={process.env.REACT_APP_TINY_URI}
         onInit={(evt, editor) => (editorRef.current = editor)}
         init={{
           height: 500,
