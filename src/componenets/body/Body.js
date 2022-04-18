@@ -9,7 +9,7 @@ import ArticleCreator from "./CreateArticle";
 import Article from "./Article";
 import SignUpForm from "./SignUp";
 import NotFound from "./404";
-import { Routes, Route, HashRouter } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import PrivateRoute from "../utils/ProtectedRoute";
 const StyledBody = styled.main`
   background: #ededed;
@@ -25,7 +25,7 @@ const Body = () => {
     <StyledBody>
       <MuteBody />
       <Routes>
-        <Route path={"/Dev-Spot-Client1/"} element={<HomePage />} />
+        <Route path={"/#/"} element={<HomePage />} />
         <Route path={"/Dev-Spot-Client1/signUp"} element={<SignUpForm />} />
         <Route path={"/Dev-Spot-Client1/signIn"} element={<SignInForm />} />
         <Route path={"/Dev-Spot-Client1/dashboard"} element={<Dashboard />} />
