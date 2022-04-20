@@ -15,6 +15,8 @@ const StyledArticleH2 = styled.h2`
   padding: 1rem 0;
   color: black;
   border-bottom: 3px solid black;
+  margin-top: 0;
+  padding-top: 0;
 `;
 
 const ArticlePreviewWrapper = () => {
