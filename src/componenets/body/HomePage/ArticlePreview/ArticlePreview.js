@@ -101,7 +101,7 @@ const ArticlePreview = (props) => {
   return (
     <StyledArticleLink
       className="exactly"
-      to={`/Dev-Spot-Client1/article/${props.id}`}
+      to={`/dev-spot-client/article/${props.id}`}
     >
       <StyledArticle index={props.index}>
         <StyledArticleInfo>

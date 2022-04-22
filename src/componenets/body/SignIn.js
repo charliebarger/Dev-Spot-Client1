@@ -17,7 +17,7 @@ const SignInForm = () => {
 
   useEffect(() => {
     if (loggedIn) {
-      navigate("/Dev-Spot-Client1/");
+      navigate("/dev-spot-client/");
     }
   }, [loggedIn, navigate]);
 
@@ -37,7 +37,7 @@ const SignInForm = () => {
       );
       const response = await data.json();
       if (data.ok) {
-        navigate("/Dev-Spot-Client1/");
+        navigate("/dev-spot-client/");
         setLoggedIn(true);
         localStorage.setItem("token", response.token);
       } else {
@@ -46,7 +46,7 @@ const SignInForm = () => {
       }
     } catch (error) {
       console.log(error);
-      navigate("/Dev-Spot-Client1/signIn");
+      navigate("/dev-spot-client/signIn");
     }
   };
 

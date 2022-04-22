@@ -25,21 +25,21 @@ const Body = () => {
     <StyledBody>
       <MuteBody />
       <Routes>
-        <Route path={"/Dev-Spot-Client1"} element={<HomePage />} />
-        <Route path={"/Dev-Spot-Client1/signUp"} element={<SignUpForm />} />
-        <Route path={"/Dev-Spot-Client1/signIn"} element={<SignInForm />} />
-        <Route path={"/Dev-Spot-Client1/dashboard"} element={<Dashboard />} />
-        <Route path={"/Dev-Spot-Client1/article/:id"} element={<Article />} />
+        <Route path={"/dev-spot-client"} element={<HomePage />} />
+        <Route path={"/dev-spot-client/signUp"} element={<SignUpForm />} />
+        <Route path={"/dev-spot-client/signIn"} element={<SignInForm />} />
+        <Route path={"/dev-spot-client/dashboard"} element={<Dashboard />} />
+        <Route path={"/dev-spot-client/article/:id"} element={<Article />} />
         <Route
-          path="/Dev-Spot-Client1/createArticle/edit/:id"
+          path="/dev-spot-client/createArticle/edit/:id"
           element={<ArticleCreator />}
         ></Route>
         <Route
-          path="/Dev-Spot-Client1/createArticle/edit/draft/:id"
+          path="/dev-spot-client/createArticle/edit/draft/:id"
           element={<ArticleCreator draft={true} />}
         ></Route>
         <Route
-          path="/Dev-Spot-Client1/createArticle"
+          path="/dev-spot-client/createArticle"
           element={
             <PrivateRoute>
               <ArticleCreator />

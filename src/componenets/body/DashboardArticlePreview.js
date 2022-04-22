@@ -171,12 +171,12 @@ const DashboardArticlePreview = (props) => {
       <StyledShadow>
         <StyledButtonWrapper>
           {props.post && (
-            <Link to={`/Dev-Spot-Client1/article/${props.articleId}`}>
+            <Link to={`/dev-spot-client/article/${props.articleId}`}>
               <StyledViewButton>View</StyledViewButton>
             </Link>
           )}
           <Link
-            to={`/Dev-Spot-Client1/createArticle/edit${
+            to={`/dev-spot-client/createArticle/edit${
               props.post ? "" : "/draft"
             }/${props.articleId}`}
           >

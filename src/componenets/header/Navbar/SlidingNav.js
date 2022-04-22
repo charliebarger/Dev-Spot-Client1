@@ -62,23 +62,23 @@ const SlidingNav = () => {
     <StyledSlidingNav closed={closed} loggedIn onClick={() => setClosed(false)}>
       {loggedIn ? (
         <>
-          <StyledLink to={"/Dev-Spot-Client1/"}>
+          <StyledLink to={"/dev-spot-client/"}>
             <StyledSliderRoute>Home</StyledSliderRoute>
           </StyledLink>
-          <StyledLink to={"/Dev-Spot-Client1/dashboard"}>
+          <StyledLink to={"/dev-spot-client/dashboard"}>
             <StyledSliderRoute>Dashboard</StyledSliderRoute>
           </StyledLink>
-          <StyledLink to={"/Dev-Spot-Client1/createArticle"}>
+          <StyledLink to={"/dev-spot-client/createArticle"}>
             <CreatePostButton />
           </StyledLink>
           <LogOutButton />
         </>
       ) : (
         <>
-          <StyledLink to={"/Dev-Spot-Client1/signIn"}>
+          <StyledLink to={"/dev-spot-client/signIn"}>
             <LogInButton></LogInButton>
           </StyledLink>
-          <StyledLink to={"/Dev-Spot-Client1/signUp"}>
+          <StyledLink to={"/dev-spot-client/signUp"}>
             <SignUpButton></SignUpButton>
           </StyledLink>
         </>

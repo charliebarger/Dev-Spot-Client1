@@ -84,7 +84,7 @@ export default function ArticleCreator({ draft }) {
             throw new Error(response.error);
           }
         } catch (error) {
-          navigate("/Dev-Spot-Client1/404");
+          navigate("/dev-spot-client/404");
           console.log(error);
         }
       };
@@ -136,7 +136,7 @@ export default function ArticleCreator({ draft }) {
       }
       const response = await data.json();
       if (data.ok) {
-        navigate("/Dev-Spot-Client1/dashboard");
+        navigate("/dev-spot-client/dashboard");
       } else {
         setError(response.error);
         throw new Error(response.error);

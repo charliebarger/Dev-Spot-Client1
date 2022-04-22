@@ -37,23 +37,23 @@ const UpperNav = () => {
       <NavWrapper>
         {loggedIn ? (
           <>
-            <StyledLink to={"/Dev-Spot-Client1/"}>
+            <StyledLink to={"/dev-spot-client/"}>
               <StyledRoute>Home</StyledRoute>
             </StyledLink>
-            <StyledLink to={"/Dev-Spot-Client1/dashboard"}>
+            <StyledLink to={"/dev-spot-client/dashboard"}>
               <StyledRoute>Dashboard</StyledRoute>
             </StyledLink>
-            <StyledLink to={"/Dev-Spot-Client1/createArticle"}>
+            <StyledLink to={"/dev-spot-client/createArticle"}>
               <CreatePostButton />
             </StyledLink>
             <LogOutButton />
           </>
         ) : (
           <>
-            <StyledLink to={"/Dev-Spot-Client1/signIn"}>
+            <StyledLink to={"/dev-spot-client/signIn"}>
               <LogInButton></LogInButton>
             </StyledLink>
-            <StyledLink to={"/Dev-Spot-Client1/signUp"}>
+            <StyledLink to={"/dev-spot-client/signUp"}>
               <SignUpButton></SignUpButton>
             </StyledLink>
           </>

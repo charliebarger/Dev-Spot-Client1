@@ -71,7 +71,7 @@ const Article = () => {
         setArticle(articleInfo.post);
         setIsLoaded(true);
       } catch (error) {
-        navigate("/Dev-Spot-Client1/404error");
+        navigate("/dev-spot-client/404error");
         console.log(error);
       }
     })();
