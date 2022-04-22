@@ -1,6 +1,6 @@
 {
   "name": "client",
-  "homepage": "https://charliebarger.github.io/Dev-Spot-Client1/",
+  "homepage": "https://charliebarger.github.io/dev-spot-client/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
