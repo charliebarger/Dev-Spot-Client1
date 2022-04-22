@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/dev-spot-client/static/css/main.8d55bd23.css",
+    "main.js": "/dev-spot-client/static/js/main.c7574a3e.js",
+    "static/media/logo.png": "/dev-spot-client/static/media/logo.dc8afe442d60f45d64d1.png",
+    "index.html": "/dev-spot-client/index.html",
+    "main.8d55bd23.css.map": "/dev-spot-client/static/css/main.8d55bd23.css.map",
+    "main.c7574a3e.js.map": "/dev-spot-client/static/js/main.c7574a3e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8d55bd23.css",
+    "static/js/main.c7574a3e.js"
+  ]
+}
